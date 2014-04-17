@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'rails', '4.1.0'
 gem 'pg'
 # Use Uglifier as compressor for JavaScript assets
@@ -30,4 +29,3 @@ gem 'pry-rails', "~> 0.3.2"
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
-
