@@ -1,11 +1,16 @@
 !!!
 %html{ lang: current_locale }
   %head
-    = csrf_meta_tags
+    %meta{ charset: 'utf-8' }
+    %meta{ 'http-equiv' => 'X-UA-Compatible',  content: 'IE=edge' }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1' }
     %title Drkstrife
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     - if params[:locale].present?
       %link{ rel: :canonical, href: canonical_link}
+    = csrf_meta_tags
   %body
+    = render 'layouts/shared/head'
     = yield
+    = render 'layouts/shared/footer'

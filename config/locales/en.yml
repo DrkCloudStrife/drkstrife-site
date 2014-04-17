@@ -21,3 +21,6 @@
 
 en:
   welcome: "Welcome"
+  navigation:
+    home: 'Home'
+    about: 'About'

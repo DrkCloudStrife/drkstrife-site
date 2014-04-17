@@ -1,0 +1,5 @@
+%header
+  %nav#main-nav
+    %ul
+      %li= link_to t('navigation.home'), root_path(locale: params[:locale])
+      %li= link_to t('navigation.about'), about_path(locale: params[:locale])
