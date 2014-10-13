@@ -1,3 +1,23 @@
-body > .container {
-  padding-top: 60px;
+html, body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  & > .container {
+    position: relative;
+    width: 960px;
+    max-width: 960px;
+    height: 100%;
+    margin: auto;
+    padding: 0;
+  }
+}
+
+footer {
+  padding-top: 80px;
+  text-align: center;
+  width: 100%;
+  margin: auto;
+  vertical-align: bottom;
 }

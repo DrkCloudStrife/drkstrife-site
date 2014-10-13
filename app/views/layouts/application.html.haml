@@ -11,8 +11,9 @@
       %link{ rel: :canonical, href: canonical_link}
     = csrf_meta_tags
   %body
-    = render 'layouts/shared/head'
-
     .container
-      = yield
+      = render 'layouts/shared/head'
+
+      .container.padded= yield
+
       = render 'layouts/shared/footer'

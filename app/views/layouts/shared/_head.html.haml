@@ -1,7 +1,7 @@
 %header#main-header.navbar
-  .container
+  .container.lightly-padded
     %nav#site-nav.navbar.navbar-default{ role: :navigation }
       %ul.nav.navbar-nav.pull-right
-        -# TODO: investigate parameter prepopulation
+        -# TODO: investigate parameter prepopulation for locale
         %li= link_to t('navigation.home'), root_path(locale: params[:locale])
         %li= link_to t('navigation.about'), about_path(locale: params[:locale])
