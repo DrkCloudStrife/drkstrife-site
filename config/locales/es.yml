@@ -1,5 +1,9 @@
 es:
-  welcome: 'Bienvenidos'
+  notification:
+    welcome: 'Bienvenidos'
   navigation:
     home: 'Hogar'
     about: 'Acerca de'
+  pages:
+    about:
+      title: 'Acerca de mi'

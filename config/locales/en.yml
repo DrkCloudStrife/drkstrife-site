@@ -20,7 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  welcome: "Welcome"
+  notification:
+    welcome: "Welcome"
   navigation:
     home: 'Home'
     about: 'About'
+  pages:
+    about:
+      title: 'About me'

@@ -1,5 +1,7 @@
-%header
-  %nav#main-nav
-    %ul
-      %li= link_to t('navigation.home'), root_path(locale: params[:locale])
-      %li= link_to t('navigation.about'), about_path(locale: params[:locale])
+%header#main-header.navbar
+  .container
+    %nav#site-nav.navbar.navbar-default{ role: :navigation }
+      %ul.nav.navbar-nav.pull-right
+        -# TODO: investigate parameter prepopulation
+        %li= link_to t('navigation.home'), root_path(locale: params[:locale])
+        %li= link_to t('navigation.about'), about_path(locale: params[:locale])
