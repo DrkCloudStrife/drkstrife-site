@@ -1,6 +1,8 @@
 html, body {
   position: relative;
   height: 100%;
+  font-family: sans-serif, 'Droid Serif';
+  color: #707070;
 }
 
 body {
@@ -11,6 +13,31 @@ body {
     height: 100%;
     margin: auto;
     padding: 0;
+  }
+
+  a {
+    color: #989898;
+    text-decoration: none;
+    &:hover{
+      color: #9b9b9b;
+      text-decoration: underline;
+    }
+    &:active, &.active {
+      color: #707070;
+      text-decoration: underline;
+    }
+  }
+
+  .pull-right { float: right; }
+
+  .pull-left { float: left; }
+
+  .clearfix {
+    &:after {
+      content: ' ';
+      display: block;
+      clear: both;
+    }
   }
 }
 

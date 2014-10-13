@@ -1,0 +1,13 @@
+header {
+  h1, h2, h3 {
+    &.title {
+      font-size: 200%;
+      line-height: 200%;
+    }
+  }
+
+  &.subject-header {}
+  &.text-header {
+    font-weight: bold;
+  }
+}

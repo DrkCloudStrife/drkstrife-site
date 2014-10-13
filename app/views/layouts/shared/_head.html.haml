@@ -1,7 +1,24 @@
-%header#main-header.navbar
+%header#main-header.navbar.clearfix
   .container.lightly-padded
     %nav#site-nav.navbar.navbar-default{ role: :navigation }
+      .container.pull-left
+        .clearfix
+          .profile-image
+            %img{ src: '', alt: 'profile picture' }
+          .profile-info
+            %p.name Eduardo Garibay-Frausto
+            %p.profession Developer &amp; Gaming Enthusiast
+            .social-media
+              %span.facebook Facebook
+              %span.twitter Twitter
+              %span.twitch Twitch
+
       %ul.nav.navbar-nav.pull-right
         -# TODO: investigate parameter prepopulation for locale
-        %li= link_to t('navigation.home'), root_path(locale: params[:locale])
-        %li= link_to t('navigation.about'), about_path(locale: params[:locale])
+        %li= link_to t('navigation.home'),
+          root_path(locale: params[:locale]),
+          class: current_page?(root_path(locale: params[:locale])) ? 'active' : nil
+
+        %li= link_to t('navigation.about'),
+          about_path(locale: params[:locale]),
+          class: current_page?(about_path(locale: params[:locale])) ? 'active' : nil

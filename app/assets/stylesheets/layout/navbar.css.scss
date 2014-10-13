@@ -1,0 +1,26 @@
+.navbar {
+  .profile-image {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .profile-info {
+    display: inline-block;
+    padding: 0 0 0 10px;
+
+    p {
+      font-size: 95%;
+      line-height: 125%;
+
+      &.name { font-weight: bold; }
+    }
+
+    .social-media {
+      margin-top: 5px;
+      span {
+        padding: 5px;
+
+        &:first-child { padding-left: 0; }
+      }
+    }
+  }
+}
