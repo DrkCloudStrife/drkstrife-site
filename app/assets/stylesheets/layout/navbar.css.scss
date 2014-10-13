@@ -16,10 +16,24 @@
 
     .social-media {
       margin-top: 5px;
-      span {
-        padding: 5px;
 
-        &:first-child { padding-left: 0; }
+      a.social {
+        color: #3b696d;
+        font-size: 120%;
+        text-decoration: none;
+        margin: 2px;
+
+        &:first-child { margin-left: 0; }
+        &:hover { color: #699295; }
+      }
+    }
+  }
+  ul.nav {
+    li {
+      display: inline-block;
+      padding: 0 10px;
+      &:last-child {
+        padding-right: 0;
       }
     }
   }

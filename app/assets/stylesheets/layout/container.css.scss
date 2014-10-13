@@ -1,6 +1,6 @@
 .container {
   background: #dbdbdb;
-  height: 100%;
+  &:first-child { height: 100%; }
 
   &.lightly-padded { padding: 15px; }
   &.padded { padding: 30px; }

@@ -6,6 +6,7 @@
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1' }
     %title Drkstrife
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    %link{ href: 'fonts/font-awesome.min.css', rel: :stylesheet, type: 'text/css' }
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     - if params[:locale].present?
       %link{ rel: :canonical, href: canonical_link}

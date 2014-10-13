@@ -9,9 +9,12 @@
             %p.name Eduardo Garibay-Frausto
             %p.profession Developer &amp; Gaming Enthusiast
             .social-media
-              %span.facebook Facebook
-              %span.twitter Twitter
-              %span.twitch Twitch
+              =link_to '//github.com/DrkCloudStrife', class: 'social' do
+                %i.fa.fa-github-square
+              =link_to '//twitter.com/DrkStrife', class: 'social' do
+                %i.fa.fa-twitter-square
+              =link_to '//twitch.tv/DrkStrife', class: 'social' do
+                %i.fa.fa-twitch
 
       %ul.nav.navbar-nav.pull-right
         -# TODO: investigate parameter prepopulation for locale
