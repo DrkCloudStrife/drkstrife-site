@@ -8,8 +8,8 @@ html, body {
 body {
   & > .container {
     position: relative;
-    width: 960px;
     max-width: 960px;
+    min-width: 520px;
     height: 100%;
     margin: auto;
     padding: 0;
