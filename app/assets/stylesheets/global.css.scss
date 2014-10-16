@@ -15,7 +15,10 @@ body {
     padding: 0;
   }
 
-  p { line-height: 125%; }
+  p {
+    line-height: 125%;
+    padding-bottom: 15px;
+  }
 
   a {
     color: #989898;

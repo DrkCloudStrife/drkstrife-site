@@ -21,6 +21,7 @@ gem 'haml', '~> 4.0.5'
 gem 'sass-rails', '~> 4.0.3'
 gem 'jquery-rails'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'redcarpet', '~> 3.2.0'
 
 gem 'pry-rails', "~> 0.3.2"
 
