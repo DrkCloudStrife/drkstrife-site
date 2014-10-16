@@ -3,11 +3,16 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
 
   helper_method :current_locale
+  helper_method :not_found
 
 protected
 
   def current_locale
     params[:locale] || I18n.default_locale
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
   end
 
 private

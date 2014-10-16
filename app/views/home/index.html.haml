@@ -1,6 +1,10 @@
 %header.subject-header
   %h1.title=t('notification.welcome')
 
-%p
-  This is just a placeholder page using bootstrap styles mainly until I can
-  write a custom layout/design.
+.container
+  %article
+    .image-container
+      %i.fa.fa-file-text
+    %header.text-header
+      %h2.title
+        %a{ href: article_path('my-first-post') } My first post

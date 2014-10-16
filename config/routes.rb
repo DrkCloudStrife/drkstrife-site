@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   scope '(:locale)' do
-    get '/about', to: 'pages#about', as: :about
+    get '/about', to: 'home#about', as: :about
+
+    # articles
+    get '/articles' => redirect('/')
+    get '/articles/:article', to: 'articles#show', as: :article
+
     root 'home#index'
   end
 
