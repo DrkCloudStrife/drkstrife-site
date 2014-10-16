@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 gem 'rails', '4.1.6'
 
@@ -9,7 +10,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring',        group: :development
+gem 'spring', group: :development
 
 gem 'haml', '~> 4.0.5'
 gem 'sass-rails', '~> 4.0.3'
@@ -20,7 +21,10 @@ gem 'redcarpet', '~> 3.2.0'
 gem 'pry-rails', "~> 0.3.2"
 
 # heroku assets
-gem 'rails_serve_static_assets', group: [:production]
+group [:production] do
+  gem 'rails_serve_static_assets'
+  gem 'rails_12factor'
+end
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
