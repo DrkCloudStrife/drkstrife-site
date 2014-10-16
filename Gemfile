@@ -21,7 +21,7 @@ gem 'redcarpet', '~> 3.2.0'
 gem 'pry-rails', "~> 0.3.2"
 
 # heroku assets
-group [:production] do
+group :production do
   gem 'rails_serve_static_assets'
   gem 'rails_12factor'
 end
