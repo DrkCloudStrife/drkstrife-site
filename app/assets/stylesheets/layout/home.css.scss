@@ -1,0 +1,22 @@
+.home-container {
+  article {
+    border-bottom: 1px dashed #3b696d;
+    padding: 10px 0;
+
+    &:last-child { border-bottom: none; }
+  }
+
+  .image-container {
+    padding-right: 20px;
+
+    i {
+      font-size: 200%;
+      line-height: 200%;
+      color: #3b696d;
+    }
+  }
+
+  .link-container {
+    p { color: #b7b7b7; }
+  }
+}

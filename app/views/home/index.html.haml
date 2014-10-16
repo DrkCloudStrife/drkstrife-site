@@ -1,10 +1,13 @@
 %header.subject-header
   %h1.title=t('notification.welcome')
 
-.container
+.container.home-container
   %article
-    .image-container
+    .image-container.pull-left
       %i.fa.fa-file-text
-    %header.text-header
-      %h2.title
-        %a{ href: article_path('my-first-post') } My first post
+    .link-container
+      %header.text-header
+        %h2.title
+          %a{ href: article_path('my-first-post') } My first post
+
+      %p Oct 15, 2014
