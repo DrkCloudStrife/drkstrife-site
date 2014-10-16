@@ -30,3 +30,6 @@ gem 'pry-rails', "~> 0.3.2"
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
+
+# heroku assets
+gem 'rails_serve_static_assets', group: [:production]
