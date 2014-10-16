@@ -4,7 +4,7 @@
       .container.pull-left
         .clearfix
           .profile-image
-            =link_to root_path do
+            =link_to root_path( locale: params[:locale] ) do
               %img{ src: '//gravatar.com/avatar/487ee72976701a1229e465dd12379908.png?size=100px', alt: 'profile picture' }
           .profile-info
             %p.name Eduardo Garibay-Frausto
