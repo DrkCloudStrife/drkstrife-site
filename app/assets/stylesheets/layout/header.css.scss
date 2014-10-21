@@ -9,5 +9,8 @@ header {
   &.subject-header {}
   &.text-header {
     font-weight: bold;
+    h1 { font-size: 175%; }
+    h2 { font-size: 175%; }
+    h3 { font-size: 150%; }
   }
 }
