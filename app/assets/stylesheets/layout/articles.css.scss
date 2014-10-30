@@ -9,5 +9,12 @@
     }
   }
 
-  .container { max-width: 720px; }
+  .container {
+    max-width: 720px;
+
+    .header-image {
+      max-width: 600px;
+      img { max-width: 100%; }
+    }
+  }
 }
