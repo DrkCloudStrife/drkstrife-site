@@ -1,4 +1,6 @@
 -# Google Analytics
 :javascript
-  ga('create', 'UA-53476061-1', 'auto');
+  if (typeof Turbolinks !== 'undefined' && Turbolinks.supported) {
+    ga('set', 'location', location.href.split('#')[0])
+  }
   ga('send', 'pageview');
