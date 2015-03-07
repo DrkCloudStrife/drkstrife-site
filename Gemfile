@@ -12,7 +12,7 @@ gem 'turbolinks'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring', group: :development
 
-gem 'haml', '~> 4.0.5'
+gem 'haml', '~> 4.0.6'
 gem 'sass-rails', '~> 4.0.3'
 gem 'jquery-rails'
 gem 'coffee-rails', '~> 4.0.0'
@@ -29,3 +29,5 @@ end
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
+gem 'benchprep_tagster', git: 'git@github.com:watermelonexpress/benchprep-tagster.git', group: [:development], require: false
+
