@@ -24,7 +24,7 @@ module DrkstrifeSite
 
     config.assets.enabled = true
 
-    config.assets.precompile += %w( font-awesome.min.css )
+    config.assets.precompile += %w( font-awesome.min.css mobile.css )
 
     config.server_hostname = Socket.gethostname.downcase.hash
   end

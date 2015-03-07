@@ -8,5 +8,6 @@
  *= require reset
  *= require font-awesome.min
  *= require_tree .
+ *= stub mobile
  *= require_self
  */
