@@ -22,14 +22,13 @@ body {
 
   a {
     color: #989898;
-    text-decoration: none;
     &:hover{
-      color: #9b9b9b;
-      text-decoration: underline;
+      color: #9f9f9f;
+      text-decoration: none;
     }
     &:active, &.active {
       color: #707070;
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 

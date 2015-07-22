@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.2.2'
 
-gem 'rails', '4.1.9'
+gem 'rails', '4.1.12'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -13,12 +13,12 @@ gem 'turbolinks'
 gem 'spring', group: :development
 
 gem 'haml', '~> 4.0.6'
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 4.0.5'
 gem 'jquery-rails'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'redcarpet', '~> 3.2.0'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'redcarpet', '~> 3.3.2'
 
-gem 'pry-rails', '~> 0.3.2'
+gem 'pry-rails', '~> 0.3.4'
 gem 'thin', '~> 1.6.3'
 
 # heroku assets
@@ -28,6 +28,6 @@ group :production do
 end
 
 # Use debugger
-gem 'debugger', group: [:development, :test]
+gem 'byebug', group: [:development, :test]
 gem 'benchprep_tagster', git: 'git@github.com:watermelonexpress/benchprep-tagster.git', group: [:development], require: false
 
