@@ -1,0 +1,28 @@
+%header.subject-header
+  = link_to projects_path do
+    %i.fa.fa-caret-left
+    Go Back
+
+#viewport.container
+
+- content_for :head do
+  :coffee
+    window.Game ||= {}
+    window.debuggable = true
+    Game.actors = {}
+    Game.config = {}
+
+- content_for :page_close do
+  :coffee
+    Game.viewport = document.getElementById('viewport')
+
+    # initial game configurations
+    Game.config.total = 0
+    Game.config.wallSize = 30
+    Game.config.mazeSize = 600
+    Game.config.mazeStart = Array(0,0)
+    Game.config.controls = Array(0,0,0,0)
+    Game.config.types = Array("wall","path","player", "exit")
+    Game.config.baseBackground = "#F2F2F2"
+    Game.config.baseWallColor = "#666666"
+    Game.config.gameWallColor = "#3C3C3C"

@@ -13,3 +13,5 @@
   ga('create', 'UA-53476061-1', 'auto');
 
 = csrf_meta_tags
+- if content_for?(:head)
+  = yield :head
