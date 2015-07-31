@@ -1,22 +1,33 @@
 #= require ./config
 
-class Game.Maze
-  initialize: (@options={})->
-    console.log 'a'
+class DrkStrife.games.Maze
+  constructor: (options={})->
+    config =
+      wallSize: 30
+      mazeSize: 600
+      baseBackground: '#F2F2F2'
+      baseWallColor: '#666666'
+      gameWallColor: '#3C3C3C'
 
-# Game.viewport = document.getElementById('viewport')
-#
+    config = DrkStrife.utils.extend(config, options)
+    config.mazeStart = DrkStrife.utils.generateStartingZone()
+
+    @viewport = document.getElementById('viewport')
+    @player = @Actor("Player 1")
+
+  score: 0
+
+  controls = Array(0,0,0,0)
+
+  objectTypes = Array('wall', 'path', 'actor', 'exit')
+
+  Actor: (name)->
+    type = 2
+    name: name
+    objectType: objectTypes[type]
+
+
 # # initial game configurations
-# Game.config.total = 0
-# Game.config.wallSize = 30
-# Game.config.mazeSize = 600
-# Game.config.mazeStart = Array(0,0)
-# Game.config.controls = Array(0,0,0,0)
-# Game.config.types = Array("wall","path","player", "exit")
-# Game.config.baseBackground = "#F2F2F2"
-# Game.config.baseWallColor = "#666666"
-# Game.config.gameWallColor = "#3C3C3C"
-#
 # Game.actors.player = {}
 # Game.actors.player.color = "#FFCC00"
 # Game.actors.player.location = Game.config.mazeStart

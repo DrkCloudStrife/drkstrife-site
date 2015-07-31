@@ -8,6 +8,4 @@
 - content_for :page_close do
   = javascript_include_tag 'projects/maze'
   :javascript
-    $(document).ready(function(){
-      new Game.Maze()
-    });
+    var maze = new DrkStrife.games.Maze()
