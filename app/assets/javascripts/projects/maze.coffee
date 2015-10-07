@@ -27,14 +27,14 @@ class DrkStrife.games.Maze
 
   controls = Array(0,0,0,0)
 
-  objectTypes = Array('wall', 'path', 'actor', 'exit')
+  # keeping until I find a good use for it
+  # objectTypes = ['wall', 'path', 'actor', 'exit']
 
   gameLog = DrkStrife.utils.GameLog
 
   Actor: (name, opts={})->
-    type_id = 2
     name:       name
-    type: objectTypes[type_id]
+    type:       'actor'
     location:   opts.location || Array(0,0)
     color:      opts.color || 'cyan'
 
@@ -67,7 +67,7 @@ class DrkStrife.games.Maze
           'yIndex:'
           yIndex
         ]
-        @paintWall xIndex, yIndex
+        @paintBlock xIndex, yIndex
         x++
       i++
 
@@ -79,15 +79,13 @@ class DrkStrife.games.Maze
     ]
 
 
-  paintWall: (x, y, color, type_id=0)->
+  paintBlock: (x, y, color, type='wall')->
     return console.error 'x must be defined' if x is null
     return console.error 'y must be defined' if y is null
 
     if color is null
       console.log "Color not set, using default."
       color = @config.gameWallColor
-
-    type = objectTypes[type_id]
 
     gameLog [
       'painting ' + type + ' color:'
@@ -115,4 +113,4 @@ class DrkStrife.games.Maze
       "Player start"
       @player.location
     ]
-    @paintWall(@player.location[0], @player.location[1], @player.color, 2)
+    @paintBlock(@player.location[0], @player.location[1], @player.color, @player.type)
