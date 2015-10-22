@@ -1,4 +1,5 @@
 #= require ./config
+window.debuggable = true
 
 class DrkStrife.games.Maze
   constructor: (options={})->
@@ -9,8 +10,10 @@ class DrkStrife.games.Maze
       baseWallColor: '#666666'
       gameWallColor: '#3C3C3C'
 
+
+    @config.mazeWalls = @config.mazeSize / @config.wallSize
     @config = DrkStrife.utils.extend(@config, options)
-    @config.mazeStart = DrkStrife.utils.generateStartingZone()
+    @config.mazeStart = DrkStrife.utils.generateStartingZone(@config.wallSize, @config.mazeWalls)
 
     @viewport = document.getElementById('viewport')
 
@@ -21,7 +24,7 @@ class DrkStrife.games.Maze
     )
 
     #launching game
-    @main(@config)
+    @play()
 
   score: 0
 
@@ -38,8 +41,7 @@ class DrkStrife.games.Maze
     location:   opts.location || Array(0,0)
     color:      opts.color || 'cyan'
 
-  main: ()->
-    mazeWalls = @config.mazeSize / @config.wallSize
+  play: ()->
 
     @canvas = document.createElement('canvas')
     @maze   = @canvas.getContext('2d')
@@ -54,14 +56,14 @@ class DrkStrife.games.Maze
     @paintMazeBackground()
 
     i = 0
-    while i < mazeWalls
+    while i < @config.mazeWalls
       xIndex = i * @config.wallSize
       gameLog [
         'xIndex:'
         xIndex
       ]
       x = 0
-      while x < mazeWalls
+      while x < @config.mazeWalls
         yIndex = x * @config.wallSize
         gameLog [
           'yIndex:'
@@ -72,10 +74,11 @@ class DrkStrife.games.Maze
       i++
 
     @generateMazePath()
+    @_bindControls()
 
     gameLog [
       "The Maze is:"
-      mazeWalls + ' x ' + mazeWalls
+      @config.mazeWalls + ' x ' + @config.mazeWalls
     ]
 
 
@@ -84,7 +87,7 @@ class DrkStrife.games.Maze
     return console.error 'y must be defined' if y is null
 
     if color is null
-      console.log "Color not set, using default."
+      gameLog "Color not set, using default."
       color = @config.gameWallColor
 
     gameLog [
@@ -114,3 +117,23 @@ class DrkStrife.games.Maze
       @player.location
     ]
     @paintBlock(@player.location[0], @player.location[1], @player.color, @player.type)
+
+  toggleMovement: (e)->
+    e.preventDefault
+    gameLog e.keyCode
+
+  _bindControls: ()->
+    debugger
+    @viewport.addEventListener('keydown', @toggleMovement)
+
+# Maze utils
+DrkStrife.utils.generateStartingZone = (size, limit)->
+  x = size * Math.round(Math.random() * (limit - 1))
+  y = size * Math.round(Math.random() * (limit - 1))
+
+  if Math.round(Math.random())
+    x = if Math.round(Math.random()) then 0 else (size * (limit - 1))
+  else
+    y = if Math.round(Math.random()) then 0 else (size * (limit - 1))
+
+  Array(x,y)

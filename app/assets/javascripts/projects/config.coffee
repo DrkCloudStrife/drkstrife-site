@@ -5,4 +5,3 @@
 window.DrkStrife ||= {}
 window.DrkStrife.games ||= {}
 window.DrkStrife.utils ||= {}
-window.debuggable = true
