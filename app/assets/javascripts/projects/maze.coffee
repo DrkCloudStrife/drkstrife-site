@@ -13,7 +13,8 @@ class DrkStrife.games.Maze
 
     @config.mazeWalls = @config.mazeSize / @config.wallSize
     @config = DrkStrife.utils.extend(@config, options)
-    @config.mazeStart = DrkStrife.utils.generateStartingZone(@config.wallSize, @config.mazeWalls)
+    @config.mazeStart = DrkStrife.utils.generateLocationZone(@config.wallSize, @config.mazeWalls)
+    @config.mazeEnd   = DrkStrife.utils.generateExitZone(@config.wallSize, @config.mazeWalls, @config.mazeStart)
 
     @viewport = document.getElementById('viewport')
 
@@ -73,6 +74,8 @@ class DrkStrife.games.Maze
         x++
       i++
 
+    @paintBlock(@config.mazeEnd[0], @config.mazeEnd[1], 'red')
+
     @generateMazePath()
     @_bindControls()
 
@@ -123,11 +126,10 @@ class DrkStrife.games.Maze
     gameLog e.keyCode
 
   _bindControls: ()->
-    debugger
     @viewport.addEventListener('keydown', @toggleMovement)
 
 # Maze utils
-DrkStrife.utils.generateStartingZone = (size, limit)->
+DrkStrife.utils.generateLocationZone = (size, limit)->
   x = size * Math.round(Math.random() * (limit - 1))
   y = size * Math.round(Math.random() * (limit - 1))
 
@@ -137,3 +139,15 @@ DrkStrife.utils.generateStartingZone = (size, limit)->
     y = if Math.round(Math.random()) then 0 else (size * (limit - 1))
 
   Array(x,y)
+
+DrkStrife.utils.generateExitZone = (size, limit, start)->
+  end = start
+
+  while start == end
+    end = DrkStrife.utils.generateLocationZone(size, limit)
+
+  return end
+
+DrkStrife.utils.checkNeighbor = (location, collection)->
+  if location
+    return
