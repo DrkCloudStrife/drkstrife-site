@@ -11,12 +11,14 @@ class DrkStrife.games.Maze
       gameWallColor: '#3C3C3C'
 
 
+
     @config.mazeWalls = @config.mazeSize / @config.wallSize
     @config = DrkStrife.utils.extend(@config, options)
     @config.mazeStart = DrkStrife.utils.generateLocationZone(@config.wallSize, @config.mazeWalls)
     @config.mazeEnd   = DrkStrife.utils.generateExitZone(@config.wallSize, @config.mazeWalls, @config.mazeStart)
 
     @viewport = document.getElementById('viewport')
+    @walls= []
 
     # building a new actor (player 1)
     @player = @Actor("Player 1",
@@ -71,6 +73,7 @@ class DrkStrife.games.Maze
           yIndex
         ]
         @paintBlock xIndex, yIndex
+        @walls.push([xIndex, yIndex]) # keeping track of the board
         x++
       i++
 
