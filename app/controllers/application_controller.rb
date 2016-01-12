@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_locale
   helper_method :not_found
+  helper_method :active_tab
+
+  class_attribute :active_tab
+
+  def self.active_tab( tab=nil )
+    self.active_tab = tab
+  end
 
 protected
 
