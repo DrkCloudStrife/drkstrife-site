@@ -1,3 +1,6 @@
+### v0.1.1
+- Adds i18nHelper
+
 ### v0.1.0
 - Updates ruby
 - Updates rails
