@@ -1,9 +1,16 @@
 es:
-  notification:
-    welcome: 'Bienvenidos'
+  home:
+    index:
+      welcome: 'Bienvenidos'
+
+    about:
+      title: 'Acerca de mi'
+
+  projects:
+    index:
+      title: 'Proyectos personales'
+
   navigation:
     home: 'Hogar'
     about: 'Acerca de'
-  pages:
-    about:
-      title: 'Acerca de mi'
+    projects: 'Proyectos'

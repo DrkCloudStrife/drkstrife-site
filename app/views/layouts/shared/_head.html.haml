@@ -2,7 +2,7 @@
 = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
 = javascript_include_tag 'application', 'data-turbolinks-track' => true
 
-- if params[:locale].present?
+- if params[:locale].present? && params[:locale] != I18n.default_locale
   %link{ rel: :canonical, href: canonical_link}
 
 :javascript
@@ -13,3 +13,5 @@
   ga('create', 'UA-53476061-1', 'auto');
 
 = csrf_meta_tags
+- if content_for?(:head)
+  = yield :head

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
-gem 'rails', '4.1.12'
+gem 'rails', '4.2.7'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -20,6 +20,9 @@ gem 'redcarpet', '~> 3.3.2'
 
 gem 'pry-rails', '~> 0.3.4'
 gem 'thin', '~> 1.6.3'
+
+# route utility
+gem 'routing-filter', '~> 0.6.0'
 
 # heroku assets
 group :production do

@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_locale
   helper_method :not_found
+  helper_method :active_tab
+
+  class_attribute :active_tab
+
+  def self.active_tab( tab=nil )
+    self.active_tab = tab
+  end
 
 protected
 
@@ -20,7 +27,8 @@ private
 
   def set_locale
     begin
-      I18n.locale = current_locale
+      I18n.locale = current_locale.to_s
+      cookies[:locale] = current_locale unless (cookies[:locale] && cookies[:locale] == current_locale)
     rescue Exception => e
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -35,6 +43,14 @@ private
       when (/Windows Phone/i)
         :phone
       end
+  end
+
+  def default_url_options
+    if I18n.default_locale != I18n.locale
+      { :locale => I18n.locale  }
+    else
+      super
+    end
   end
 
 end

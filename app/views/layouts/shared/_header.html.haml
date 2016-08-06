@@ -4,7 +4,7 @@
       .container.pull-left
         .clearfix
           .profile-image
-            =link_to root_path( locale: params[:locale] ) do
+            =link_to root_path do
               %img{ src: '//gravatar.com/avatar/487ee72976701a1229e465dd12379908.png?size=100px', alt: 'profile picture' }
           .profile-info
             %p.name Eduardo Garibay-Frausto
@@ -20,9 +20,13 @@
       %ul.nav.navbar-nav.pull-right
         -# TODO: investigate parameter prepopulation for locale
         %li= link_to t('navigation.home'),
-          root_path(locale: params[:locale]),
-          class: current_page?(root_path(locale: params[:locale])) ? 'active' : nil
+          root_path,
+          class: active_tab == :home ? 'active' : nil
+
+        %li= link_to t('navigation.projects'),
+          projects_path,
+          class: active_tab == :projects ? 'active' : nil
 
         %li= link_to t('navigation.about'),
-          about_path(locale: params[:locale]),
-          class: current_page?(about_path(locale: params[:locale])) ? 'active' : nil
+          about_path,
+          class: active_tab == :about ? 'active' : nil

@@ -1,18 +1,16 @@
 Rails.application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  filter :locale
 
-  scope '(:locale)' do
-    get '/about', to: 'home#about', as: :about
+  get '/about', to: 'home#about', as: :about
 
-    # articles
-    get '/articles' => redirect('/')
-    get '/articles/:article', to: 'articles#show', as: :article
+  # articles
+  get '/articles' => redirect('/')
+  get '/articles/:article', to: 'articles#show', as: :article
 
-    root 'home#index'
-  end
+  get '/projects', to: 'projects#index'
+  get '/projects/maze', to: 'projects#maze'
 
-  get '/:locale' => 'home#index'
+  root 'home#index'
 
   # Example resource route with options:
   #   resources :products do

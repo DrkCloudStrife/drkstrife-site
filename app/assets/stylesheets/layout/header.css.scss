@@ -1,4 +1,5 @@
 header {
+
   h1, h2, h3 {
     &.title {
       font-size: 200%;
@@ -6,7 +7,10 @@ header {
     }
   }
 
-  &.subject-header {}
+  &.subject-header {
+    padding-bottom: 15px;
+  }
+
   &.text-header {
     font-weight: bold;
     h1 { font-size: 175%; }
