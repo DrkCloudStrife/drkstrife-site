@@ -1,5 +1,4 @@
 #= require ./config
-window.debuggable = true
 
 class DrkStrife.games.Maze
   constructor: (options={})->

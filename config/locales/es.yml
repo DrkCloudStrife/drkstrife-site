@@ -8,8 +8,9 @@ es:
 
   projects:
     index:
-      title: 'Projectos personales'
+      title: 'Proyectos personales'
 
   navigation:
     home: 'Hogar'
     about: 'Acerca de'
+    projects: 'Proyectos'
