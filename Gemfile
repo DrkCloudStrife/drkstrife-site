@@ -21,6 +21,9 @@ gem 'redcarpet', '~> 3.3.2'
 gem 'pry-rails', '~> 0.3.4'
 gem 'thin', '~> 1.6.3'
 
+# route utility
+gem 'routing-filter', '~> 0.6.0'
+
 # heroku assets
 group :production do
   gem 'rails_serve_static_assets'

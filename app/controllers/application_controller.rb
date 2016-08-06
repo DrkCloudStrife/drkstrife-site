@@ -27,7 +27,8 @@ private
 
   def set_locale
     begin
-      I18n.locale = current_locale
+      I18n.locale = current_locale.to_s
+      cookies[:locale] = current_locale unless (cookies[:locale] && cookies[:locale] == current_locale)
     rescue Exception => e
       raise ActionController::RoutingError.new('Not Found')
     end
@@ -42,6 +43,14 @@ private
       when (/Windows Phone/i)
         :phone
       end
+  end
+
+  def default_url_options
+    if I18n.default_locale != I18n.locale
+      { :locale => I18n.locale  }
+    else
+      super
+    end
   end
 
 end

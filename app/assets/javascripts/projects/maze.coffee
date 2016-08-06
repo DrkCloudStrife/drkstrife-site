@@ -9,8 +9,6 @@ class DrkStrife.games.Maze
       baseWallColor: '#666666'
       gameWallColor: '#3C3C3C'
 
-
-
     @config.mazeWalls = @config.mazeSize / @config.wallSize
     @config = DrkStrife.utils.extend(@config, options)
     @config.mazeStart = DrkStrife.utils.generateLocationZone(@config.wallSize, @config.mazeWalls)
@@ -44,7 +42,6 @@ class DrkStrife.games.Maze
     color:      opts.color || 'cyan'
 
   play: ()->
-
     @canvas = document.createElement('canvas')
     @maze   = @canvas.getContext('2d')
 
