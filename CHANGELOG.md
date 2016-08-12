@@ -1,3 +1,12 @@
+### v0.1.2
+- Removes scss deprecation warnings
+- Adds back link to articles
+- Adds basic styles to `code` markup
+- Move authorship partial to article's show view DRY things up
+
+### v0.1.1
+- Adds i18nHelper
+
 ### v0.1.0
 - Updates ruby
 - Updates rails

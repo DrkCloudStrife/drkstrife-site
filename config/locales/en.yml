@@ -30,7 +30,3 @@ en:
   projects:
     index:
       title: 'Personal projects'
-
-  navigation:
-    home: 'Home'
-    about: 'About'

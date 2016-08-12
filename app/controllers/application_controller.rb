@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  helper I18nHelper
+
   protect_from_forgery with: :exception
   before_action :set_locale
   before_action :detect_variant
