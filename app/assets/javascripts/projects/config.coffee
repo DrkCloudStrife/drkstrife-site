@@ -3,5 +3,6 @@
 #= require_tree ./utils
 
 window.DrkStrife ||= {}
+window.DrkStrife.config ||= {}
 window.DrkStrife.games ||= {}
 window.DrkStrife.utils ||= {}

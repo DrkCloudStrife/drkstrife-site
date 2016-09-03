@@ -1,0 +1,15 @@
+.container
+  %header.subject-header
+    = link_to projects_path do
+      %i.fa.fa-caret-left
+      Go Back
+
+  :markdown
+    I created this game as an easter egg for BenchPrep
+
+  #viewport.text-center
+
+  - content_for :page_close do
+    = javascript_include_tag 'projects/snake'
+    :javascript
+      var maze = new DrkStrife.games.Snake()

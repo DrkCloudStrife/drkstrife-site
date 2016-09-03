@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get '/projects', to: 'projects#index'
   get '/projects/maze', to: 'projects#maze'
+  get '/projects/snake', to: 'projects#snake'
 
   root 'home#index'
 
