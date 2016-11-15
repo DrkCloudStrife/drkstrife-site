@@ -17,5 +17,6 @@
 
       = render 'layouts/shared/footer'
     = render 'layouts/shared/tracking' if Rails.env.production?
+    = page_specific_scripts
     - if content_for?(:page_close)
       = yield :page_close
