@@ -13,17 +13,40 @@ class DrkStrife.games.Snake
   gameMaxSpeed: 35
   speedDidChange: false
 
-  # default settings
+  # canvas dimensions (px)
+  boardWidth: 400
+  boardHeight: 400
   cellWidth: 10
+
+  # default settings
+  # snakeCellWidth: 10 # - might not need if we use cellWidth properly
+  # snakeCellHeight: 10
   snakeLength: 5
   snakeCells: []
   userScore: 0
 
+  # game colors
   backgroundColor: '#FFF'
   backgroundBorder: '#000'
-
   snakeColor: '#0B6274'
   snakeBorder: '#FFF'
 
-  constructor: (options={})->
-    # TODO: implement snake
+  constructor: (elementID)->
+    @$el = $(elementID)
+    @buildCanvas()
+
+    # TODO: Move these to start game
+    # @drawBoard()
+    # @createSnake()
+    # @drawSnake()
+    #
+    # @startGame()
+
+  buildCanvas: ()->
+    @canvas = $('<canvas>')[0]
+    @context = @canvas.getContext('2d')
+
+    @canvas.width = @boardWidth
+    @canvas.height = @boardHeight
+
+    @$el.html(@canvas)
