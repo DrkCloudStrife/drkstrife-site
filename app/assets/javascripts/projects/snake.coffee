@@ -21,7 +21,7 @@ class DrkStrife.games.Snake
   # default settings
   # snakeCellWidth: 10 # - might not need if we use cellWidth properly
   # snakeCellHeight: 10
-  snakeLength: 5
+  snakeLength: 4
   snakeCells: []
   userScore: 0
 
@@ -35,17 +35,14 @@ class DrkStrife.games.Snake
     @$el = $(elementID)
     @_buildCanvas()
 
-    # TODO: Move these to start game
-    # @drawBoard()
-    # @createSnake()
-    # @drawSnake()
-    #
     @startGame()
 
-  # Will also work as reset
+  # Builds the board and game assets
   startGame: ()->
     @_drawBoard()
+    @_createSnake()
 
+  # Builds a canvas where our snake game will live
   _buildCanvas: ()->
     @canvas = $('<canvas>')[0]
     @context = @canvas.getContext('2d')
@@ -55,8 +52,16 @@ class DrkStrife.games.Snake
 
     @$el.html(@canvas)
 
+  # Draws the board to the canvas
   _drawBoard: ()->
     @context.fillStyle = @boardBackground
     @context.fillRect(0, 0, @boardWidth, @boardHeight)
     @context.strokeStyle = @boardBorder
     @context.strokeRect(0, 0, @boardWidth, @boardHeight)
+
+  # Creates the snake in memory so we can keep track of it in the canvas
+  _createSnake: ()->
+    i = @snakeLength
+    while i > 0
+      @snakeCells.push({ x: i, y: 0 })
+      i--
