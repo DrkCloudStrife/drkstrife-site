@@ -30,6 +30,8 @@ class DrkStrife.games.Snake
   boardBorder: '#000'
   snakeColor: '#0B6274'
   snakeBorder: '#FFF'
+  pillColor: '#D0342D'
+  pillBorder: '#FFF'
 
   constructor: (elementID)->
     @$el = $(elementID)
@@ -41,6 +43,7 @@ class DrkStrife.games.Snake
   startGame: ()->
     @_drawBoard()
     @_createSnake()
+    @_createPill()
 
   # Builds a canvas where our snake game will live
   _buildCanvas: ()->
@@ -65,3 +68,11 @@ class DrkStrife.games.Snake
     while i > 0
       @snakeCells.push({ x: i, y: 0 })
       i--
+
+  # Creates the pill, or food for the snake to eat in memory so we can keep
+  # track in memory
+  # TODO: Ensure pill is not within the snake
+  _createPill: ()->
+    @pill =
+      x: Math.round(Math.random() * (@boardWidth - @cellWidth) / @cellWidth)
+      y: Math.round(Math.random() * (@boardHeight - @cellWidth) / @cellWidth)
