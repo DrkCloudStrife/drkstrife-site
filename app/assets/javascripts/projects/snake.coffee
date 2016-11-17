@@ -42,8 +42,9 @@ class DrkStrife.games.Snake
   # Builds the board and game assets
   startGame: ()->
     @_drawBoard()
-    @_createSnake()
+    @_buildSnake()
     @_createPill()
+    @_drawSnake()
 
   # Builds a canvas where our snake game will live
   _buildCanvas: ()->
@@ -55,24 +56,43 @@ class DrkStrife.games.Snake
 
     @$el.html(@canvas)
 
-  # Draws the board to the canvas
+  # Builds the snake in memory so we can keep track of it in the canvas
+  _buildSnake: ()->
+    i = @snakeLength - 1
+    while i >= 0
+      @snakeCells.push({ x: i, y: 0 })
+      i--
+
+  # Creates the pill, or food for the snake to eat in memory so we can keep
+  # track of it when drawing on canvas
+  # TODO: Ensure pill is not within the snake
+  _createPill: ()->
+    @pill =
+      x: Math.round(Math.random() * (@boardWidth - @cellWidth) / @cellWidth)
+      y: Math.round(Math.random() * (@boardHeight - @cellWidth) / @cellWidth)
+
+  #### Canvas Drawings
+
+  # Draws the game board to the canvas
   _drawBoard: ()->
     @context.fillStyle = @boardBackground
     @context.fillRect(0, 0, @boardWidth, @boardHeight)
     @context.strokeStyle = @boardBorder
     @context.strokeRect(0, 0, @boardWidth, @boardHeight)
 
-  # Creates the snake in memory so we can keep track of it in the canvas
-  _createSnake: ()->
-    i = @snakeLength
-    while i > 0
-      @snakeCells.push({ x: i, y: 0 })
+  # Draws the snake to the canvas
+  _drawSnake: ()->
+    i = @snakeCells.length - 1
+    while i >= 0
+      cell = @snakeCells[i]
+      @_paintCell(cell.x, cell.y)
       i--
 
-  # Creates the pill, or food for the snake to eat in memory so we can keep
-  # track in memory
-  # TODO: Ensure pill is not within the snake
-  _createPill: ()->
-    @pill =
-      x: Math.round(Math.random() * (@boardWidth - @cellWidth) / @cellWidth)
-      y: Math.round(Math.random() * (@boardHeight - @cellWidth) / @cellWidth)
+  _paintCell: (x, y, color=@snakeColor, border=@snakeBorder)->
+    posX = x * @cellWidth
+    posY = y * @cellWidth
+
+    @context.fillStyle = color
+    @context.fillRect(posX, posY, @cellWidth, @cellWidth)
+    @context.strokeStyle = border
+    @context.strokeRect(posX, posY, @cellWidth, @cellWidth)
