@@ -45,6 +45,7 @@ class DrkStrife.games.Snake
     @_buildSnake()
     @_createPill()
     @_drawSnake()
+    @_drawPill()
 
   # Builds a canvas where our snake game will live
   _buildCanvas: ()->
@@ -65,7 +66,6 @@ class DrkStrife.games.Snake
 
   # Creates the pill, or food for the snake to eat in memory so we can keep
   # track of it when drawing on canvas
-  # TODO: Ensure pill is not within the snake
   _createPill: ()->
     @pill =
       x: Math.round(Math.random() * (@boardWidth - @cellWidth) / @cellWidth)
@@ -85,10 +85,18 @@ class DrkStrife.games.Snake
     i = @snakeCells.length - 1
     while i >= 0
       cell = @snakeCells[i]
-      @_paintCell(cell.x, cell.y)
+      @_drawCell(cell.x, cell.y)
       i--
 
-  _paintCell: (x, y, color=@snakeColor, border=@snakeBorder)->
+  _drawPill: ()->
+    if @snakeCells.indexOf(@pill) isnt -1
+      @_createPill()
+      return @_drawPill()
+
+    @_drawCell(@pill.x, @pill.y, @pillColor, @pillBorder)
+
+  # Draws a square on the board
+  _drawCell: (x, y, color=@snakeColor, border=@snakeBorder)->
     posX = x * @cellWidth
     posY = y * @cellWidth
 
