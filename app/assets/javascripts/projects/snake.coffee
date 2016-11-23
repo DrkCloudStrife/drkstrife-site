@@ -37,6 +37,12 @@ class DrkStrife.games.Snake
     @$el = $(elementID)
     @_buildCanvas()
 
+    @$canvas.attr('tabindex',0)
+    @$canvas.on('keydown', @_toggleMovement)
+
+    @$canvas.attr('contentEditable', true)
+    @$canvas[0].contentEditable = true
+
     @startGame()
 
   # Builds the board and game assets
@@ -119,13 +125,12 @@ class DrkStrife.games.Snake
   # instead, they would have to press left or right and up. If l/r is still
   # pending, we have to queue up and vice versa to ensure the 180 turn works
   # without causing collision.
-  _toggleMovement: (e)->
+  _toggleMovement: (e)=>
     e.preventDefault
 
-    console.log 'toggle movevement..'
+    key = parseInt(e.keyCode)
     return false if @isMoving
 
-    key = parseInt(e.keyCode)
     # Here we check which arrow key the user pressed and check that the snake
     # is not going the opposite direction so it doesn't collide with itself
     # causing an instant game over.
@@ -134,13 +139,36 @@ class DrkStrife.games.Snake
       when key is 39 and @direction isnt 'left' then 'right' # right key is pressed
       when key is 38 and @direction isnt 'down' then 'up'    # up key is pressed
       when key is 40 and @direction isnt 'up' then 'down'    # down key is pressed
+      when key is 27 or key is 9 then @$canvas.blur(); false
+      else false
 
-    console.log 'Want to move', newDirection
-
-    if newDirection isnt @direction
-      console.log 'moving!'
+    if typeof newDirection isnt 'undefined' and newDirection isnt @direction and newDirection isnt false
       @direction = newDirection
       @isMoving  = true
       # @update()
 
     return false # used to prevent page scrolling
+
+  moveSnake: ()->
+    snakeHeadXPosition = @snakeCells[0].x
+    snakeHeadYPosition = @snakeCells[0].y
+
+    switch @direction
+      when 'right' then snakeHeadXPosition++
+      when 'left' then snakeHeadXPosition--
+      when 'up' then snakeHeadYPosition--
+      when 'down' then snakeHeadYPosition++
+
+    newPosition = {
+      x: snakeHeadXPosition
+      y: snakeHeadYPosition
+    }
+
+    if newPosition.x is @pill.x and newPosition.y is @pill.y
+      @_createPill()
+    else
+      @snakeCells.pop()
+
+    @snakeCells.unshift(newPosition)
+
+    @isMoving = false if @isMoving is true
