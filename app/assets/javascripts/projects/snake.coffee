@@ -9,8 +9,10 @@
 
 class DrkStrife.games.Snake
   # speed controls
-  gameSpeed: 85
-  gameMaxSpeed: 35
+  gameFPS: 60
+  currentFPS: 0
+  gameSpeed: 25
+  gameMaxSpeed: 25
   speedDidChange: false
 
   # canvas dimensions (px)
@@ -32,6 +34,7 @@ class DrkStrife.games.Snake
   snakeBorder: '#FFF'
   pillColor: '#D0342D'
   pillBorder: '#FFF'
+  textColor: '#333'
 
   constructor: (elementID)->
     @$el = $(elementID)
@@ -43,18 +46,29 @@ class DrkStrife.games.Snake
     @$canvas.attr('contentEditable', true)
     @$canvas[0].contentEditable = true
 
-    @startGame()
-
   # Builds the board and game assets
   startGame: ()->
+    @$canvas.focus()
+    @resetGame()
     @_buildSnake()
     @_createPill()
     @draw()
+    @_refreshRateIntervalId = setInterval(@loop, 1000 / @gameFPS) # 60 fps
+    @_gameSpeedIntervalId   = setInterval(@update, 1000 / @gameSpeed)
 
   draw: ()->
     @_drawBoard()
     @_drawSnake()
     @_drawPill()
+
+  resetGame: ()->
+    clearInterval(@_refreshRateIntervalId) if @_refreshRateIntervalId
+    clearInterval(@_gameSpeedIntervalId) if @_gameSpeedIntervalId
+    @snakeLength = 4
+    @snakeCells = []
+    @userScore = 0
+    @direction = 'right'
+    @isMoving = false
 
   # Builds a canvas where our snake game will live
   _buildCanvas: ()->
@@ -172,3 +186,9 @@ class DrkStrife.games.Snake
     @snakeCells.unshift(newPosition)
 
     @isMoving = false if @isMoving is true
+
+  update: ()=>
+    @moveSnake()
+
+  loop: ()=>
+    @draw()

@@ -12,9 +12,11 @@
     code I wrote, I've actually rewritten it from scratch to fix some of the
     issues that the existing game has. I hope you enjoy~ :)
 
+  %p
+    %a{ href: 'javascript:app.startGame();' } Play Snake :)
+
   #viewport.text-center
 
   - content_for :page_close do
-    = javascript_include_tag 'projects/snake'
     :javascript
       var app = new DrkStrife.games.Snake('#viewport')
