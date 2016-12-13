@@ -1,0 +1,7 @@
+%header.subject-header
+  = link_to projects_path do
+    %i.fa.fa-caret-left
+    Go Back
+
+.container
+  = render @current_page rescue not_found
