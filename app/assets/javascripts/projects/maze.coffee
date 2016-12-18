@@ -158,3 +158,7 @@ DrkStrife.utils.generateExitZone = (size, limit, start)->
 DrkStrife.utils.checkNeighbor = (location, collection)->
   if location
     return
+
+# prepare on page load.
+$ ->
+  window.app = new DrkStrife.games.Maze()

@@ -13,9 +13,11 @@ module ApplicationHelper
   end
 
   def page_specific_scripts
-    path = "#{controller_name}/#{ action_name}.js"
+    @partial ||= action_name
+    path = "#{controller_name}/#{@partial}.js"
+
     if has_asset?(path)
-      return javascript_include_tag path
+      return javascript_include_tag path, data: { turbolinks_track: true }
     end
   end
 

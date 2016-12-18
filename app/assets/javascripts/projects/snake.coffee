@@ -11,7 +11,7 @@ class DrkStrife.games.Snake
   # speed controls
   gameFPS: 60
   currentFPS: 0
-  gameSpeed: 25
+  gameSpeed: 10
   gameMaxSpeed: 25
   speedDidChange: false
 
@@ -53,6 +53,7 @@ class DrkStrife.games.Snake
     @_buildSnake()
     @_createPill()
     @draw()
+
     @_refreshRateIntervalId = setInterval(@loop, 1000 / @gameFPS) # 60 fps
     @_gameSpeedIntervalId   = setInterval(@update, 1000 / @gameSpeed)
 
@@ -159,7 +160,6 @@ class DrkStrife.games.Snake
     if typeof newDirection isnt 'undefined' and newDirection isnt @direction and newDirection isnt false
       @direction = newDirection
       @isMoving  = true
-      # @update()
 
     return false # used to prevent page scrolling
 
@@ -192,3 +192,6 @@ class DrkStrife.games.Snake
 
   loop: ()=>
     @draw()
+
+$ ->
+  window.app = new DrkStrife.games.Snake('#viewport')
