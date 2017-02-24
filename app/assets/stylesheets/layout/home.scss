@@ -1,7 +1,7 @@
 .home-container {
   article {
     border-bottom: 1px dashed #3b696d;
-    padding: 10px 0;
+    padding: 5px 0;
 
     &:last-child { border-bottom: none; }
   }
@@ -17,6 +17,9 @@
   }
 
   .link-container {
-    p { font-size: 0.75em; }
+    p {
+      font-size: 0.75em;
+      padding-bottom: 5px;
+    }
   }
 }
