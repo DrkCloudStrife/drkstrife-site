@@ -1,3 +1,7 @@
+### v0.1.3
+- Upgrades ruby to 2.4.0
+- Upgrades rails to 4.2.8
+
 ### v0.1.2
 - Removes scss deprecation warnings
 - Adds back link to articles
