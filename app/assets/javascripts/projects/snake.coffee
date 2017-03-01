@@ -41,6 +41,8 @@ class DrkStrife.games.Snake
     @_buildCanvas()
 
     @$canvas.attr('tabindex',0)
+    @$canvas.on('focus', @play)
+    @$canvas.on('blur', @pause)
     @$canvas.on('keydown', @_toggleMovement)
 
     @$canvas.attr('contentEditable', true)
@@ -48,23 +50,30 @@ class DrkStrife.games.Snake
 
   # Builds the board and game assets
   startGame: ()->
-    @$canvas.focus()
     @resetGame()
     @_buildSnake()
     @_createPill()
     @draw()
 
+  # Starts updating game and rendering
+  play: ()=>
     @_refreshRateIntervalId = setInterval(@loop, 1000 / @gameFPS) # 60 fps
     @_gameSpeedIntervalId   = setInterval(@update, 1000 / @gameSpeed)
 
+  # Pauses the game from updating and rendering
+  pause: ()=>
+    clearInterval(@_refreshRateIntervalId) if @_refreshRateIntervalId
+    clearInterval(@_gameSpeedIntervalId) if @_gameSpeedIntervalId
+
+  # Draws into canvas what is currently happening in the game
   draw: ()->
     @_drawBoard()
     @_drawSnake()
     @_drawPill()
 
+  # Resets the snake game to it's starting configuration
   resetGame: ()->
-    clearInterval(@_refreshRateIntervalId) if @_refreshRateIntervalId
-    clearInterval(@_gameSpeedIntervalId) if @_gameSpeedIntervalId
+    @pause()
     @snakeLength = 4
     @snakeCells = []
     @userScore = 0
@@ -113,6 +122,9 @@ class DrkStrife.games.Snake
       @_drawCell(cell.x, cell.y)
       i--
 
+  # Checks that the pill is not colliding with the current location of the
+  # snake and then renders it, otherwise it will search for a new location
+  # where to place the pill
   _drawPill: ()->
     if @snakeCells.indexOf(@pill) isnt -1
       @_createPill()
@@ -154,7 +166,9 @@ class DrkStrife.games.Snake
       when key is 39 and @direction isnt 'left' then 'right' # right key is pressed
       when key is 38 and @direction isnt 'down' then 'up'    # up key is pressed
       when key is 40 and @direction isnt 'up' then 'down'    # down key is pressed
-      when key is 27 or key is 9 then @$canvas.blur(); false
+      when key is 27 or key is 9
+        @$canvas.blur()
+        false
       else false
 
     if typeof newDirection isnt 'undefined' and newDirection isnt @direction and newDirection isnt false
@@ -163,6 +177,7 @@ class DrkStrife.games.Snake
 
     return false # used to prevent page scrolling
 
+  # Logic to move the snake within the grid of the canvas
   moveSnake: ()->
     snakeHeadXPosition = @snakeCells[0].x
     snakeHeadYPosition = @snakeCells[0].y
@@ -187,11 +202,21 @@ class DrkStrife.games.Snake
 
     @isMoving = false if @isMoving is true
 
+  # Validations of snake position
+  # Should end game if snake is out of bound
+  # Should end game if snake collides with self
+  validateSnakePosition: ()=>
+    console.log @snakeCells
+
+  # Updates the snake position,
   update: ()=>
     @moveSnake()
+    @validateSnakePosition()
 
   loop: ()=>
     @draw()
 
+
 $ ->
   window.app = new DrkStrife.games.Snake('#viewport')
+  app.startGame()
