@@ -193,11 +193,14 @@ class DrkStrife.games.Snake
       y: snakeHeadYPosition
     }
 
+    @validate(newPosition)
+
     if newPosition.x is @pill.x and newPosition.y is @pill.y
       @_createPill()
     else
       @snakeCells.pop()
 
+    # TODO: Add scoring
     @snakeCells.unshift(newPosition)
 
     @isMoving = false if @isMoving is true
@@ -205,13 +208,29 @@ class DrkStrife.games.Snake
   # Validations of snake position
   # Should end game if snake is out of bound
   # Should end game if snake collides with self
-  validateSnakePosition: ()=>
-    console.log @snakeCells
+  validate: (nextPosition)->
+    endGame = false
+    nx = nextPosition.x
+    ny = nextPosition.y
+
+    # check out of bound
+    endGame = true if nx <= -1 or ny <= -1
+    endGame = true if nx >= (@boardWidth / @cellWidth)
+    endGame = true if ny >= (@boardHeight / @cellWidth)
+
+    # check snake collision
+    i = 0
+    while i < @snakeCells.length
+      cells = @snakeCells[i]
+      endGame = true if cells.x is nx and cells.y is ny
+      i++
+
+    # TODO: Add end game view
+    @pause() if endGame
 
   # Updates the snake position,
   update: ()=>
     @moveSnake()
-    @validateSnakePosition()
 
   loop: ()=>
     @draw()
