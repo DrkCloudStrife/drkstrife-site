@@ -24,10 +24,7 @@ module DrkstrifeSite
     # config.i18n.default_locale = :de
     config.filter_parameters += [:password]
 
-    config.assets.enabled = true
     config.i18n.fallbacks = true
-
-    config.assets.precompile += %w( font-awesome.min.css mobile.css projects/maze.js )
 
     config.server_hostname = Socket.gethostname.downcase.hash
   end

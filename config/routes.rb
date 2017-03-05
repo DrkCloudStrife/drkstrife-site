@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/articles/:article', to: 'articles#show', as: :article
 
   get '/projects', to: 'projects#index'
-  get '/projects/maze', to: 'projects#maze'
+  get '/projects/:project', to: 'projects#show', as: :project
 
   root 'home#index'
 

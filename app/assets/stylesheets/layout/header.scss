@@ -2,8 +2,8 @@ header {
 
   h1, h2, h3 {
     &.title {
-      font-size: 200%;
-      line-height: 200%;
+      font-size: 2em;
+      line-height: 1.5em;
     }
   }
 
@@ -14,7 +14,7 @@ header {
   &.text-header {
     font-weight: bold;
     h1 { font-size: 175%; }
-    h2 { font-size: 175%; }
-    h3 { font-size: 150%; }
+    h2 { font-size: 150%; }
+    h3 { font-size: 125%; }
   }
 }

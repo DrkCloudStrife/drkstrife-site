@@ -2,7 +2,7 @@ html, body {
   position: relative;
   height: 100%;
   font-family: sans-serif, 'Droid Serif';
-  color: #707070;
+  color: #333;
 }
 
 body {
@@ -21,13 +21,13 @@ body {
   }
 
   a {
-    color: #989898;
+    color: #333;
     &:hover{
-      color: #9f9f9f;
+      color: #3a3a3a;
       text-decoration: none;
     }
     &:active, &.active {
-      color: #707070;
+      color: #444;
       text-decoration: none;
     }
   }

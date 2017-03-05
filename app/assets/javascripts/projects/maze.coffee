@@ -13,6 +13,7 @@ class DrkStrife.games.Maze
     @config = DrkStrife.utils.extend(@config, options)
     @config.mazeStart = DrkStrife.utils.generateLocationZone(@config.wallSize, @config.mazeWalls)
     @config.mazeEnd   = DrkStrife.utils.generateExitZone(@config.wallSize, @config.mazeWalls, @config.mazeStart)
+    @config.isSupported = DrkStrife.utils.browserDetection() is 'Web Browser'
 
     @viewport = document.getElementById('viewport')
     @walls= []
@@ -24,7 +25,10 @@ class DrkStrife.games.Maze
     )
 
     #launching game
-    @play()
+    if @config.isSupported
+      @play()
+    else
+      @notSupported()
 
   score: 0
 
@@ -83,6 +87,10 @@ class DrkStrife.games.Maze
       @config.mazeWalls + ' x ' + @config.mazeWalls
     ]
 
+  notSupported: ->
+    notSupported = document.createElement('p')
+    notSupported.innerHTML = "We currently do not support this platform"
+    @viewport.appendChild notSupported
 
   paintBlock: (x, y, color, type='wall')->
     return console.error 'x must be defined' if x is null
@@ -150,3 +158,7 @@ DrkStrife.utils.generateExitZone = (size, limit, start)->
 DrkStrife.utils.checkNeighbor = (location, collection)->
   if location
     return
+
+# prepare on page load.
+$ ->
+  window.app = new DrkStrife.games.Maze()

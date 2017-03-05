@@ -2,7 +2,18 @@
   %h1.title= t('.title')
 
 .container.pages-container
-  .link-container
-    %i.fa.fa-gamepad
-    %a{ href: projects_maze_path } JSMaze
-    \- Simple JavaScript Maze project
+  %table.table
+    %tbody
+      %tr
+        %th
+          %i.fa.fa-gamepad
+        %td
+          %a{ href: project_path('snake') } JS Snake
+          \- A snake game made in JavaScript
+
+      %tr
+        %th
+          %i.fa.fa-gamepad
+        %td
+          %a{ href: project_path('maze') } JS Maze
+          \- Simple JavaScript Maze project
