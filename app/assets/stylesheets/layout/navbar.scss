@@ -1,3 +1,5 @@
+@import '../lib/**/*';
+
 .navbar {
   .profile-image {
     display: inline-block;
@@ -19,13 +21,13 @@
       margin-top: 5px;
 
       a.social {
-        color: #3b696d;
+        color: $icon-color;
         font-size: 120%;
         text-decoration: none;
         margin: 2px;
 
         &:first-child { margin-left: 0; }
-        &:hover { color: #699295; }
+        &:hover { color: $icon-color-hover; }
       }
     }
   }

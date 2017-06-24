@@ -1,3 +1,5 @@
+@import '../lib/**/*';
+
 .article-container {
   ul {
     margin-left: 30px;
@@ -6,6 +8,20 @@
       list-style-type: disc;
       line-height: 100%;
       padding: 3px 0;
+    }
+  }
+
+  .text-header {
+    box-sizing: border-box;
+    margin: 10px 0px 15px;
+
+    h2 {
+      &.title {
+        font-size: 175%;
+        border-bottom: 1px;
+        border-style: solid;
+        border-color: $border;
+      }
     }
   }
 

@@ -1,6 +1,8 @@
+@import '../lib/**/*';
+
 .home-container {
   article {
-    border-bottom: 1px dashed #3b696d;
+    border-bottom: 1px dashed $border;
     padding: 5px 0;
 
     &:last-child { border-bottom: none; }
@@ -12,7 +14,7 @@
     i {
       font-size: 200%;
       line-height: 150%;
-      color: #3b696d;
+      color: $icon-color;
     }
   }
 

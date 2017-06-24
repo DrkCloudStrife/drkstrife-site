@@ -1,3 +1,5 @@
+@import '../lib/**/*';
+
 .table {
   width: 100%;
   max-width: 100%;
@@ -10,7 +12,7 @@
         padding: 5px;
         line-height: 1em;
         vertical-align: top;
-        border-bottom: 1px solid #666;
+        border-bottom: 1px solid $grey-666;
       }
 
       > th {

@@ -1,8 +1,10 @@
+@import 'lib/**/*';
+
 html, body {
   position: relative;
   height: 100%;
   font-family: sans-serif, 'Droid Serif';
-  color: #333;
+  color: $grey;
 }
 
 body {
@@ -13,6 +15,9 @@ body {
     min-height: 100%;
     margin: auto;
     padding: 0;
+    border-width: 0px 1px;
+    border-style: solid;
+    border-color: $border;
   }
 
   p {
@@ -21,13 +26,13 @@ body {
   }
 
   a {
-    color: #333;
+    color: $grey;
     &:hover{
-      color: #3a3a3a;
+      color: $grey-hover;
       text-decoration: none;
     }
     &:active, &.active {
-      color: #444;
+      color: $grey-active;
       text-decoration: none;
     }
   }
@@ -45,7 +50,7 @@ body {
   }
 
   .author {
-    border-top: 1px dashed #3b696d;
+    border-top: 1px dashed $border;
     padding: 15px 0;
   }
 }
