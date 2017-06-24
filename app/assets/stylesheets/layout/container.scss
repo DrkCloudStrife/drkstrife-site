@@ -1,5 +1,7 @@
+@import '../lib/**/*';
+
 .container {
-  background: #dbdbdb;
+  background-color: $background;
   &:first-child { min-height: 100%; }
 
   &.lightly-padded { padding: 15px; }

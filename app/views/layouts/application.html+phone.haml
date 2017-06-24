@@ -13,7 +13,7 @@
     .container
       = render 'layouts/shared/header'
 
-      .container.padded= yield
+      .container.lightly-padded= yield
 
       = render 'layouts/shared/footer'
     = render 'layouts/shared/tracking' if Rails.env.production?

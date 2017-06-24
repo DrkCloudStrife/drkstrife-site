@@ -1,6 +1,8 @@
+@import '../lib/**/*';
+
 code {
   font-family: courier, monaco, monospace;
-  background-color: #3b696d;
+  background-color: $border;
   color: #ffffff;
   border-radius: 2px;
   padding: 5px;

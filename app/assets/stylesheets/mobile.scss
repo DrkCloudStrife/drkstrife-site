@@ -40,6 +40,14 @@ body.mobile {
     }
   }
 
+.article-container {
+  .text-header {
+    h2 {
+      &.title { font-size: 125%; }
+    }
+  }
+}
+
   header {
     &.text-header {
       h2 {
