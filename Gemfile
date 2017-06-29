@@ -19,14 +19,14 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'redcarpet', '~> 3.3.2'
 
 gem 'pry-rails', '~> 0.3.4'
-gem 'thin', '~> 1.6.3'
+gem 'thin', '~> 1.7.0'
 
 # route utility
-gem 'routing-filter', '~> 0.6.0'
+gem 'routing-filter', '~> 0.6.1'
 
 # heroku assets
 group :production do
-  gem 'rails_serve_static_assets'
+  gem 'rails_serve_static_assets', '~> 0.0.5'
   gem 'rails_12factor'
 end
 
