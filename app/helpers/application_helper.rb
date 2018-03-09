@@ -21,11 +21,12 @@ module ApplicationHelper
     end
   end
 
-  # NOTE: This is only the case because I'm using Heroku. If you're using
-  # nginx or other web server for your production environment, I recommend
-  # to check this anwswer: http://stackoverflow.com/a/35319530
   def has_asset?(path)
-    !Rails.application.assets.find_asset(path).nil?
+    if Rails.configuration.assets.compile
+      Rails.application.precompiled_assets.include?(path)
+    else
+      Rails.application.assets_manifest.assets[path].present?
+    end
   end
 
 end
