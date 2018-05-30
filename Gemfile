@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.5.0'
 
-gem 'rails', '5.1.5'
+gem 'rails', '5.1.6'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -18,7 +18,7 @@ end
 
 gem 'haml', '~> 5.0.4'
 gem 'sass-rails', '~> 5.0.7'
-gem 'jquery-rails', '~> 4.3.1'
+gem 'jquery-rails', '~> 4.3.3'
 gem 'coffee-rails', '~> 4.2.2'
 gem 'redcarpet', '~> 3.4.0'
 
@@ -28,7 +28,7 @@ gem 'colored2', '~> 3.1.2'
 gem 'thin', '~> 1.7.2'
 
 # route utility
-gem 'routing-filter', '~> 0.6.1'
+gem 'routing-filter', '~> 0.6.2'
 
 # heroku assets
 group :production do
