@@ -25,7 +25,7 @@ gem 'redcarpet', '~> 3.4.0'
 gem 'pry-rails', '~> 0.3.6'
 gem 'colored2', '~> 3.1.2'
 
-gem 'thin', '~> 1.7.2'
+gem 'puma', '~> 3.11.4'
 
 # route utility
 gem 'routing-filter', '~> 0.6.2'
