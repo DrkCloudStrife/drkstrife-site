@@ -21,6 +21,7 @@ gem 'sass-rails', '~> 5.0.7'
 gem 'jquery-rails', '~> 4.3.3'
 gem 'coffee-rails', '~> 4.2.2'
 gem 'redcarpet', '~> 3.4.0'
+gem 'webpacker', '~> 4.0.7'
 
 gem 'pry-rails', '~> 0.3.6'
 gem 'colored2', '~> 3.1.2'
