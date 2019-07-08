@@ -26,6 +26,7 @@ class DrkStrife.games.Snake
   userScore: 0
   direction: 'right'
   isMoving: false
+  isGameOver: false
 
   # game colors
   boardBackground: '#FFF'
@@ -35,6 +36,11 @@ class DrkStrife.games.Snake
   pillColor: '#D0342D'
   pillBorder: '#FFF'
   textColor: '#333'
+
+  # Default font settings
+  fontSize: 24
+  fontType: 'px'
+  fontFamily: 'Arial'
 
   constructor: (elementID)->
     @$el = $(elementID)
@@ -57,6 +63,7 @@ class DrkStrife.games.Snake
 
   # Starts updating game and rendering
   play: ()=>
+    return if @isGameOver
     @_refreshRateIntervalId = setInterval(@loop, 1000 / @gameFPS) # 60 fps
     @_gameSpeedIntervalId   = setInterval(@update, 1000 / @gameSpeed)
 
@@ -68,8 +75,8 @@ class DrkStrife.games.Snake
   # Draws into canvas what is currently happening in the game
   draw: ()->
     @_drawBoard()
-    @_drawSnake()
     @_drawPill()
+    @_drawSnake()
 
   # Resets the snake game to it's starting configuration
   resetGame: ()->
@@ -79,6 +86,12 @@ class DrkStrife.games.Snake
     @userScore = 0
     @direction = 'right'
     @isMoving = false
+
+  endGame: ()->
+    @pause()
+    @_drawBoard()
+    # TODO: dynamically set position to center based on canvas and text
+    @_drawText("Game Over", { position: [250, 190] })
 
   # Builds a canvas where our snake game will live
   _buildCanvas: ()->
@@ -121,6 +134,14 @@ class DrkStrife.games.Snake
       cell = @snakeCells[i]
       @_drawCell(cell.x, cell.y)
       i--
+
+  _drawText: (text, opts={})->
+    position = opts.position || [0,0]
+    color    = opts.color    || @textColor
+
+    @context.font = "#{@fontSize}#{@fontType} #{@fontFamily}"
+    @context.fillStyle = color
+    @context.fillText(text, position[0], position[1])
 
   # Checks that the pill is not colliding with the current location of the
   # snake and then renders it, otherwise it will search for a new location
@@ -226,7 +247,9 @@ class DrkStrife.games.Snake
       i++
 
     # TODO: Add end game view
-    @pause() if endGame
+    if endGame
+      @isGameOver = endGame
+      @endGame()
 
   # Updates the snake position,
   update: ()=>
