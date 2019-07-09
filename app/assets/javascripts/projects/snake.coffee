@@ -56,14 +56,19 @@ class DrkStrife.games.Snake
 
   # Builds the board and game assets
   startGame: ()->
-    @resetGame()
+    # @resetGame()
     @_buildSnake()
     @_createPill()
     @draw()
 
+  restart: ()->
+    @resetGame()
+    @startGame()
+
   # Starts updating game and rendering
   play: ()=>
     return if @isGameOver
+    return if typeof @_refreshRateIntervalId isnt 'undefined'
 
     if typeof @timePausedAt isnt 'undefined'
       @timeSinceLastFed = @timeSinceLastFed + (Date.now() - @timePausedAt)
@@ -75,11 +80,12 @@ class DrkStrife.games.Snake
     @_gameSpeedIntervalId   = setInterval(@update, 1000 / @gameSpeed)
 
   # Pauses the game from updating and rendering
-  pause: (e)=>
-    return if typeof e is 'undefined'
+  pause: ()=>
     @timePausedAt = Date.now()
     clearInterval(@_refreshRateIntervalId) if @_refreshRateIntervalId
     clearInterval(@_gameSpeedIntervalId) if @_gameSpeedIntervalId
+    @_refreshRateIntervalId = undefined
+    @_gameSpeedIntervalId = undefined
 
   # Draws into canvas what is currently happening in the game
   draw: ()->
@@ -89,19 +95,21 @@ class DrkStrife.games.Snake
 
   # Resets the snake game to it's starting configuration
   resetGame: ()->
-    @pause()
-    @snakeLength = 4
-    @snakeCells = []
-    @userScore = 0
-    @direction = 'right'
-    @isMoving = false
+    # @pause()
+    # @snakeLength = 4
+    @snakeCells  = []
+    @userScore   = 0
+    @direction   = 'right'
+    @isMoving   = false
+    @isGameOver = false
 
   endGame: ()->
     @isGameOver = true
-    @pause(@)
+    @pause()
     @_drawBoard()
     @_drawText("Game Over", { position: 'center' })
     @_drawText("Final Score: #{@userScore}", { position: 'center', fontSize: 12, offset: [0, 10] })
+    @_drawButton("Play Again")
 
   updateScore: ()->
     timeToEat = @timeCurrentFed - @timeSinceLastFed
@@ -194,6 +202,9 @@ class DrkStrife.games.Snake
     textPosition = @_calculateTextPosition(position, offset)
 
     @context.fillText(text, textPosition[0], textPosition[1])
+
+  _drawButton: ()->
+    # TODO: Add button and event listener
 
   #### End of drawings ####
 
