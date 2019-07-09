@@ -88,10 +88,10 @@ class DrkStrife.games.Snake
     @isMoving = false
 
   endGame: ()->
+    @isGameOver = true
     @pause()
     @_drawBoard()
-    # TODO: dynamically set position to center based on canvas and text
-    @_drawText("Game Over", { position: [250, 190] })
+    @_drawText("Game Over", { position: 'center' })
 
   # Builds a canvas where our snake game will live
   _buildCanvas: ()->
@@ -135,21 +135,18 @@ class DrkStrife.games.Snake
       @_drawCell(cell.x, cell.y)
       i--
 
-  _drawText: (text, opts={})->
-    position = opts.position || [0,0]
-    color    = opts.color    || @textColor
-
-    @context.font = "#{@fontSize}#{@fontType} #{@fontFamily}"
-    @context.fillStyle = color
-    @context.fillText(text, position[0], position[1])
-
   # Checks that the pill is not colliding with the current location of the
   # snake and then renders it, otherwise it will search for a new location
   # where to place the pill
   _drawPill: ()->
-    if @snakeCells.indexOf(@pill) isnt -1
-      @_createPill()
-      return @_drawPill()
+    if typeof @snakeCells.findIndex is 'function'
+      if @snakeCells.findIndex((c)=> c.x is @pill.x and c.y is @pill.y) isnt -1
+        @_createPill()
+        return @_drawPill()
+    else
+      if @snakeCells.map((c)=> [c.x,c.y].join(',')).indexOf([@pill.x,@pill.y].join(',')) isnt -1
+        @_createPill()
+        return @_drawPill()
 
     @_drawCell(@pill.x, @pill.y, @pillColor, @pillBorder)
 
@@ -163,7 +160,61 @@ class DrkStrife.games.Snake
     @context.strokeStyle = border
     @context.strokeRect(posX, posY, @cellWidth, @cellWidth)
 
+  _drawText: (text, opts={})->
+    position   = opts.position   || 'center'
+    offset     = opts.offset     || [0,0]
+    color      = opts.color      || @textColor
+    fontSize   = opts.fontSize   || @fontSize
+    fontType   = opts.fontType   || @fontType
+    fontFamily = opts.fontFamily || @fontFamily
+
+    @context.font = "#{fontSize}#{fontType} #{fontFamily}"
+    @context.fillStyle = color
+
+    textOffsetX = Math.floor(@context.measureText(text).width/2)
+    textOffsetY = Math.floor(fontSize/2)
+    offset = [offset[0] - textOffsetX, offset[1] - textOffsetY]
+    textPosition = @_calculateTextPosition(position, offset)
+
+    @context.fillText(text, textPosition[0], textPosition[1])
+
   #### End of drawings ####
+
+  # Calculations
+  # Description: Provide a position where the text should be placed. If there
+  # multiple texts, you can set an offset for each.
+  #
+  # Supported positions;
+  #   - topLeft
+  #   - topCenter
+  #   - topRight
+  #   - midLeft
+  #   - center (default)
+  #   - midRight
+  #   - botLeft
+  #   - botCenter
+  #   - botRight
+
+  _calculateTextPosition: (position, offset = [0,0])->
+    myDefaultPosition = switch position
+      when 'topLeft'   then [0,0]
+      when 'topCenter' then [@boardWidth/2,0]
+      when 'topRight'  then [@boardWidth,0]
+      when 'midLeft'   then [0,@boardHeight/2]
+      when 'midRight'  then [@boardWidth,@boardHeight/2]
+      when 'botLeft'   then [0,@boardHeight]
+      when 'botCenter' then [@boardWidth/2,@boardHeight]
+      when 'botRight'  then [@boardWidth,@boardHeight]
+      else
+        px = @boardWidth/2
+        py = @boardHeight/2
+        [px, py]
+
+    if offset isnt [0,0]
+      myDefaultPosition[0] = myDefaultPosition[0] + offset[0]
+      myDefaultPosition[1] = myDefaultPosition[1] + offset[1]
+
+    return myDefaultPosition
 
   # Game Controls
   # TODO: if snake direction is changing, we should also queue the upcoming
@@ -230,26 +281,23 @@ class DrkStrife.games.Snake
   # Should end game if snake is out of bound
   # Should end game if snake collides with self
   validate: (nextPosition)->
-    endGame = false
+    isEndGame = false
     nx = nextPosition.x
     ny = nextPosition.y
 
     # check out of bound
-    endGame = true if nx <= -1 or ny <= -1
-    endGame = true if nx >= (@boardWidth / @cellWidth)
-    endGame = true if ny >= (@boardHeight / @cellWidth)
+    isEndGame = true if nx <= -1 or ny <= -1
+    isEndGame = true if nx >= (@boardWidth / @cellWidth)
+    isEndGame = true if ny >= (@boardHeight / @cellWidth)
 
     # check snake collision
     i = 0
     while i < @snakeCells.length
       cells = @snakeCells[i]
-      endGame = true if cells.x is nx and cells.y is ny
+      isEndGame = true if cells.x is nx and cells.y is ny
       i++
 
-    # TODO: Add end game view
-    if endGame
-      @isGameOver = endGame
-      @endGame()
+    @endGame() if isEndGame
 
   # Updates the snake position,
   update: ()=>
