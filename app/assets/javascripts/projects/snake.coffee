@@ -64,11 +64,20 @@ class DrkStrife.games.Snake
   # Starts updating game and rendering
   play: ()=>
     return if @isGameOver
+
+    if typeof @timePausedAt isnt 'undefined'
+      @timeSinceLastFed = @timeSinceLastFed + (Date.now() - @timePausedAt)
+      @timePausedAt = undefined
+    else
+      @timeSinceLastFed = Date.now()
+
     @_refreshRateIntervalId = setInterval(@loop, 1000 / @gameFPS) # 60 fps
     @_gameSpeedIntervalId   = setInterval(@update, 1000 / @gameSpeed)
 
   # Pauses the game from updating and rendering
-  pause: ()=>
+  pause: (e)=>
+    return if typeof e is 'undefined'
+    @timePausedAt = Date.now()
     clearInterval(@_refreshRateIntervalId) if @_refreshRateIntervalId
     clearInterval(@_gameSpeedIntervalId) if @_gameSpeedIntervalId
 
@@ -89,9 +98,17 @@ class DrkStrife.games.Snake
 
   endGame: ()->
     @isGameOver = true
-    @pause()
+    @pause(@)
     @_drawBoard()
     @_drawText("Game Over", { position: 'center' })
+    @_drawText("Final Score: #{@userScore}", { position: 'center', fontSize: 12, offset: [0, 10] })
+
+  updateScore: ()->
+    timeToEat = @timeCurrentFed - @timeSinceLastFed
+    @timeSinceLastFed = @timeCurrentFed
+    baseScore = @snakeCells.length * Math.floor(timeToEat / 1000)
+    score = Math.pow(baseScore, 0.9) / Math.floor(timeToEat / 1000)
+    @userScore += Math.round(score)
 
   # Builds a canvas where our snake game will live
   _buildCanvas: ()->
@@ -268,7 +285,9 @@ class DrkStrife.games.Snake
     @validate(newPosition)
 
     if newPosition.x is @pill.x and newPosition.y is @pill.y
+      @timeCurrentFed = Date.now()
       @_createPill()
+      @updateScore()
     else
       @snakeCells.pop()
 
