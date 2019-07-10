@@ -27,6 +27,7 @@ class DrkStrife.games.Snake
   direction: 'right'
   isMoving: false
   isGameOver: false
+  tScoreMod: 0.8
 
   # game colors
   boardBackground: '#FFF'
@@ -64,6 +65,7 @@ class DrkStrife.games.Snake
   restart: ()->
     @resetGame()
     @startGame()
+    undefined
 
   # Starts updating game and rendering
   play: ()=>
@@ -112,11 +114,15 @@ class DrkStrife.games.Snake
     @_drawButton("Play Again")
 
   updateScore: ()->
-    timeToEat = @timeCurrentFed - @timeSinceLastFed
+    timeToEat         = @timeCurrentFed - @timeSinceLastFed
     @timeSinceLastFed = @timeCurrentFed
-    baseScore = @snakeCells.length * Math.floor(timeToEat / 1000)
-    score = Math.pow(baseScore, 0.9) / Math.floor(timeToEat / 1000)
-    @userScore += Math.round(score)
+    secondsToEat      = Math.floor(timeToEat / 1000)
+    secondsToEat      = 1 if secondsToEat is 0
+    baseScore         = @snakeCells.length
+    penaltyTimeScore  = Math.pow(secondsToEat, @tScoreMod)
+    score             = Math.ceil(Math.sqrt(baseScore / (penaltyTimeScore * 2)))
+
+    @userScore += score
 
   # Builds a canvas where our snake game will live
   _buildCanvas: ()->
