@@ -37,11 +37,16 @@ class DrkStrife.games.Snake
   pillColor: '#D0342D'
   pillBorder: '#FFF'
   textColor: '#333'
+  btnColor: '#0B6274'
+  btnBorder: '#000'
+  btnTextColor: '#FFF'
 
   # Default font settings
   fontSize: 24
   fontType: 'px'
   fontFamily: 'Arial'
+
+  btnCollection: []
 
   constructor: (elementID)->
     @$el = $(elementID)
@@ -51,20 +56,21 @@ class DrkStrife.games.Snake
     @$canvas.on('focus', @play)
     @$canvas.on('blur', @pause)
     @$canvas.on('keydown', @_toggleMovement)
+    @$canvas.on('click', @handleClickEvent)
 
     @$canvas.attr('contentEditable', true)
     @$canvas[0].contentEditable = true
 
   # Builds the board and game assets
-  startGame: ()->
-    # @resetGame()
+  prepareGame: ()->
     @_buildSnake()
     @_createPill()
     @draw()
 
-  restart: ()->
+  restart: ()=>
     @resetGame()
-    @startGame()
+    @prepareGame()
+    @play()
     undefined
 
   # Starts updating game and rendering
@@ -97,8 +103,6 @@ class DrkStrife.games.Snake
 
   # Resets the snake game to it's starting configuration
   resetGame: ()->
-    # @pause()
-    # @snakeLength = 4
     @snakeCells  = []
     @userScore   = 0
     @direction   = 'right'
@@ -110,8 +114,8 @@ class DrkStrife.games.Snake
     @pause()
     @_drawBoard()
     @_drawText("Game Over", { position: 'center' })
-    @_drawText("Final Score: #{@userScore}", { position: 'center', fontSize: 12, offset: [0, 10] })
-    @_drawButton("Play Again")
+    @_drawText("Final Score: #{@userScore}", { position: 'center', fontSize: 12, offset: [0, 15] })
+    @_drawButton("Play Again", { offset: [0,45], position: 'center', width: 100, height: 30, action: @restart })
 
   updateScore: ()->
     timeToEat         = @timeCurrentFed - @timeSinceLastFed
@@ -201,16 +205,57 @@ class DrkStrife.games.Snake
 
     @context.font = "#{fontSize}#{fontType} #{fontFamily}"
     @context.fillStyle = color
+    @context.textBaseline = 'bottom'
+    @context.textAlign= 'left'
 
     textOffsetX = Math.floor(@context.measureText(text).width/2)
-    textOffsetY = Math.floor(fontSize/2)
-    offset = [offset[0] - textOffsetX, offset[1] - textOffsetY]
-    textPosition = @_calculateTextPosition(position, offset)
+    offset = [offset[0] - textOffsetX, offset[1] - fontSize]
+    textPosition = @_calculatePosition(position, offset)
 
     @context.fillText(text, textPosition[0], textPosition[1])
 
-  _drawButton: ()->
-    # TODO: Add button and event listener
+  # Might consider moving this to an HTML dom object on top of canvas
+  # Draws a button in canvas and registers in the `btnCollection`
+  # When the click event happens in the canvas, we iterate through
+  # `btnCollection` and if the click is between the button boundaries,
+  # it calls `action`.
+  _drawButton: (text='Button', opts={})->
+    action     = opts.action     || $.noop
+    position   = opts.position   || 'center'
+    offset     = opts.offset     || [0,0]
+    btnWidth   = opts.width      || 100
+    btnHeight  = opts.height     || 30
+    btnColor   = opts.btnColor   || @btnColor
+    btnBorder  = opts.btnBorder  || @btnBorder
+    textColor  = opts.textColor  || @btnTextColor
+    btnOffsetX = Math.floor(btnWidth/2)
+    btnOffsetY = Math.floor(btnHeight/2)
+    btnOffset  = [offset[0] - btnOffsetX, offset[1] - btnOffsetY]
+    txtOffset  = [offset[0], offset[1] + btnOffsetY]
+    btnPosition = @_calculatePosition(position, btnOffset)
+
+    textOpts   = {
+      position: position,
+      offset: txtOffset,
+      color: textColor,
+      fontSize: 12,
+      fontType: opts.fontType,
+      fontFamily: opts.fontFamily
+    }
+
+    @context.fillStyle = btnColor
+    @context.fillRect(btnPosition[0], btnPosition[1], btnWidth, btnHeight)
+    @context.strokeStyle = btnBorder
+    @context.strokeRect(btnPosition[0], btnPosition[1], btnWidth, btnHeight)
+    @btnCollection.push {
+      width: btnWidth,
+      height: btnHeight,
+      top: btnPosition[1],
+      left: btnPosition[0],
+      action: action
+    }
+
+    @_drawText(text, textOpts)
 
   #### End of drawings ####
 
@@ -229,7 +274,7 @@ class DrkStrife.games.Snake
   #   - botCenter
   #   - botRight
 
-  _calculateTextPosition: (position, offset = [0,0])->
+  _calculatePosition: (position, offset = [0,0])->
     myDefaultPosition = switch position
       when 'topLeft'   then [0,0]
       when 'topCenter' then [@boardWidth/2,0]
@@ -335,6 +380,19 @@ class DrkStrife.games.Snake
 
     @endGame() if isEndGame
 
+  handleClickEvent: (event)=>
+    event.preventDefault
+    return if @btnCollection.length is 0
+
+    x = event.pageX - @$canvas[0].offsetLeft
+    y = event.pageY - @$canvas[0].offsetTop
+
+    @btnCollection.forEach (col)->
+      withinX = col.left < x and col.left + col.width > x
+      withinY = col.top < y and col.top + col.height > y
+
+      col.action() if withinX and withinY
+
   # Updates the snake position,
   update: ()=>
     @moveSnake()
@@ -345,4 +403,4 @@ class DrkStrife.games.Snake
 
 $ ->
   window.app = new DrkStrife.games.Snake('#viewport')
-  app.startGame()
+  app.prepareGame()
