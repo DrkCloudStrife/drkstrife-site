@@ -103,11 +103,12 @@ class DrkStrife.games.Snake
 
   # Resets the snake game to it's starting configuration
   resetGame: ()->
-    @snakeCells  = []
-    @userScore   = 0
-    @direction   = 'right'
-    @isMoving   = false
-    @isGameOver = false
+    @btnCollection = []
+    @snakeCells    = []
+    @userScore     = 0
+    @direction     = 'right'
+    @isMoving      = false
+    @isGameOver    = false
 
   endGame: ()->
     @isGameOver = true
@@ -382,10 +383,10 @@ class DrkStrife.games.Snake
 
   handleClickEvent: (event)=>
     event.preventDefault
-    return if @btnCollection.length is 0
+    return if @btnCollection.length is 0 or !@isGameOver
 
-    x = event.pageX - @$canvas[0].offsetLeft
-    y = event.pageY - @$canvas[0].offsetTop
+    x = event.pageX - @$canvas.offset().left
+    y = event.pageY - @$canvas.offset().top
 
     @btnCollection.forEach (col)->
       withinX = col.left < x and col.left + col.width > x
