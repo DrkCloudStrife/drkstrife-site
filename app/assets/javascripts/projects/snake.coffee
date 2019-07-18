@@ -26,6 +26,8 @@ class DrkStrife.games.Snake
   userScore: 0
   direction: 'right'
   isMoving: false
+  isGameOver: false
+  tScoreMod: 0.8
 
   # game colors
   boardBackground: '#FFF'
@@ -35,6 +37,16 @@ class DrkStrife.games.Snake
   pillColor: '#D0342D'
   pillBorder: '#FFF'
   textColor: '#333'
+  btnColor: '#0B6274'
+  btnBorder: '#000'
+  btnTextColor: '#FFF'
+
+  # Default font settings
+  fontSize: 24
+  fontType: 'px'
+  fontFamily: 'Arial'
+
+  btnCollection: []
 
   constructor: (elementID)->
     @$el = $(elementID)
@@ -44,41 +56,77 @@ class DrkStrife.games.Snake
     @$canvas.on('focus', @play)
     @$canvas.on('blur', @pause)
     @$canvas.on('keydown', @_toggleMovement)
+    @$canvas.on('click', @handleClickEvent)
 
     @$canvas.attr('contentEditable', true)
     @$canvas[0].contentEditable = true
 
   # Builds the board and game assets
-  startGame: ()->
-    @resetGame()
+  prepareGame: ()->
     @_buildSnake()
     @_createPill()
     @draw()
 
+  restart: ()=>
+    @resetGame()
+    @prepareGame()
+    @play()
+    undefined
+
   # Starts updating game and rendering
   play: ()=>
+    return if @isGameOver
+    return if typeof @_refreshRateIntervalId isnt 'undefined'
+
+    if typeof @timePausedAt isnt 'undefined'
+      @timeSinceLastFed = @timeSinceLastFed + (Date.now() - @timePausedAt)
+      @timePausedAt = undefined
+    else
+      @timeSinceLastFed = Date.now()
+
     @_refreshRateIntervalId = setInterval(@loop, 1000 / @gameFPS) # 60 fps
     @_gameSpeedIntervalId   = setInterval(@update, 1000 / @gameSpeed)
 
   # Pauses the game from updating and rendering
   pause: ()=>
+    @timePausedAt = Date.now()
     clearInterval(@_refreshRateIntervalId) if @_refreshRateIntervalId
     clearInterval(@_gameSpeedIntervalId) if @_gameSpeedIntervalId
+    @_refreshRateIntervalId = undefined
+    @_gameSpeedIntervalId = undefined
 
   # Draws into canvas what is currently happening in the game
   draw: ()->
     @_drawBoard()
-    @_drawSnake()
     @_drawPill()
+    @_drawSnake()
 
   # Resets the snake game to it's starting configuration
   resetGame: ()->
+    @snakeCells  = []
+    @userScore   = 0
+    @direction   = 'right'
+    @isMoving   = false
+    @isGameOver = false
+
+  endGame: ()->
+    @isGameOver = true
     @pause()
-    @snakeLength = 4
-    @snakeCells = []
-    @userScore = 0
-    @direction = 'right'
-    @isMoving = false
+    @_drawBoard()
+    @_drawText("Game Over", { position: 'center' })
+    @_drawText("Final Score: #{@userScore}", { position: 'center', fontSize: 12, offset: [0, 15] })
+    @_drawButton("Play Again", { offset: [0,45], position: 'center', width: 100, height: 30, action: @restart })
+
+  updateScore: ()->
+    timeToEat         = @timeCurrentFed - @timeSinceLastFed
+    @timeSinceLastFed = @timeCurrentFed
+    secondsToEat      = Math.floor(timeToEat / 1000)
+    secondsToEat      = 1 if secondsToEat is 0
+    baseScore         = @snakeCells.length
+    penaltyTimeScore  = Math.pow(secondsToEat, @tScoreMod)
+    score             = Math.ceil(Math.sqrt(baseScore / (penaltyTimeScore * 2)))
+
+    @userScore += score
 
   # Builds a canvas where our snake game will live
   _buildCanvas: ()->
@@ -126,9 +174,14 @@ class DrkStrife.games.Snake
   # snake and then renders it, otherwise it will search for a new location
   # where to place the pill
   _drawPill: ()->
-    if @snakeCells.indexOf(@pill) isnt -1
-      @_createPill()
-      return @_drawPill()
+    if typeof @snakeCells.findIndex is 'function'
+      if @snakeCells.findIndex((c)=> c.x is @pill.x and c.y is @pill.y) isnt -1
+        @_createPill()
+        return @_drawPill()
+    else
+      if @snakeCells.map((c)=> [c.x,c.y].join(',')).indexOf([@pill.x,@pill.y].join(',')) isnt -1
+        @_createPill()
+        return @_drawPill()
 
     @_drawCell(@pill.x, @pill.y, @pillColor, @pillBorder)
 
@@ -142,7 +195,105 @@ class DrkStrife.games.Snake
     @context.strokeStyle = border
     @context.strokeRect(posX, posY, @cellWidth, @cellWidth)
 
+  _drawText: (text, opts={})->
+    position   = opts.position   || 'center'
+    offset     = opts.offset     || [0,0]
+    color      = opts.color      || @textColor
+    fontSize   = opts.fontSize   || @fontSize
+    fontType   = opts.fontType   || @fontType
+    fontFamily = opts.fontFamily || @fontFamily
+
+    @context.font = "#{fontSize}#{fontType} #{fontFamily}"
+    @context.fillStyle = color
+    @context.textBaseline = 'bottom'
+    @context.textAlign= 'left'
+
+    textOffsetX = Math.floor(@context.measureText(text).width/2)
+    offset = [offset[0] - textOffsetX, offset[1] - fontSize]
+    textPosition = @_calculatePosition(position, offset)
+
+    @context.fillText(text, textPosition[0], textPosition[1])
+
+  # Might consider moving this to an HTML dom object on top of canvas
+  # Draws a button in canvas and registers in the `btnCollection`
+  # When the click event happens in the canvas, we iterate through
+  # `btnCollection` and if the click is between the button boundaries,
+  # it calls `action`.
+  _drawButton: (text='Button', opts={})->
+    action     = opts.action     || $.noop
+    position   = opts.position   || 'center'
+    offset     = opts.offset     || [0,0]
+    btnWidth   = opts.width      || 100
+    btnHeight  = opts.height     || 30
+    btnColor   = opts.btnColor   || @btnColor
+    btnBorder  = opts.btnBorder  || @btnBorder
+    textColor  = opts.textColor  || @btnTextColor
+    btnOffsetX = Math.floor(btnWidth/2)
+    btnOffsetY = Math.floor(btnHeight/2)
+    btnOffset  = [offset[0] - btnOffsetX, offset[1] - btnOffsetY]
+    txtOffset  = [offset[0], offset[1] + btnOffsetY]
+    btnPosition = @_calculatePosition(position, btnOffset)
+
+    textOpts   = {
+      position: position,
+      offset: txtOffset,
+      color: textColor,
+      fontSize: 12,
+      fontType: opts.fontType,
+      fontFamily: opts.fontFamily
+    }
+
+    @context.fillStyle = btnColor
+    @context.fillRect(btnPosition[0], btnPosition[1], btnWidth, btnHeight)
+    @context.strokeStyle = btnBorder
+    @context.strokeRect(btnPosition[0], btnPosition[1], btnWidth, btnHeight)
+    @btnCollection.push {
+      width: btnWidth,
+      height: btnHeight,
+      top: btnPosition[1],
+      left: btnPosition[0],
+      action: action
+    }
+
+    @_drawText(text, textOpts)
+
   #### End of drawings ####
+
+  # Calculations
+  # Description: Provide a position where the text should be placed. If there
+  # multiple texts, you can set an offset for each.
+  #
+  # Supported positions;
+  #   - topLeft
+  #   - topCenter
+  #   - topRight
+  #   - midLeft
+  #   - center (default)
+  #   - midRight
+  #   - botLeft
+  #   - botCenter
+  #   - botRight
+
+  _calculatePosition: (position, offset = [0,0])->
+    myDefaultPosition = switch position
+      when 'topLeft'   then [0,0]
+      when 'topCenter' then [@boardWidth/2,0]
+      when 'topRight'  then [@boardWidth,0]
+      when 'midLeft'   then [0,@boardHeight/2]
+      when 'midRight'  then [@boardWidth,@boardHeight/2]
+      when 'botLeft'   then [0,@boardHeight]
+      when 'botCenter' then [@boardWidth/2,@boardHeight]
+      when 'botRight'  then [@boardWidth,@boardHeight]
+      else
+        px = @boardWidth/2
+        py = @boardHeight/2
+        [px, py]
+
+    if offset isnt [0,0]
+      myDefaultPosition[0] = myDefaultPosition[0] + offset[0]
+      myDefaultPosition[1] = myDefaultPosition[1] + offset[1]
+
+    return myDefaultPosition
 
   # Game Controls
   # TODO: if snake direction is changing, we should also queue the upcoming
@@ -196,7 +347,9 @@ class DrkStrife.games.Snake
     @validate(newPosition)
 
     if newPosition.x is @pill.x and newPosition.y is @pill.y
+      @timeCurrentFed = Date.now()
       @_createPill()
+      @updateScore()
     else
       @snakeCells.pop()
 
@@ -209,24 +362,36 @@ class DrkStrife.games.Snake
   # Should end game if snake is out of bound
   # Should end game if snake collides with self
   validate: (nextPosition)->
-    endGame = false
+    isEndGame = false
     nx = nextPosition.x
     ny = nextPosition.y
 
     # check out of bound
-    endGame = true if nx <= -1 or ny <= -1
-    endGame = true if nx >= (@boardWidth / @cellWidth)
-    endGame = true if ny >= (@boardHeight / @cellWidth)
+    isEndGame = true if nx <= -1 or ny <= -1
+    isEndGame = true if nx >= (@boardWidth / @cellWidth)
+    isEndGame = true if ny >= (@boardHeight / @cellWidth)
 
     # check snake collision
     i = 0
     while i < @snakeCells.length
       cells = @snakeCells[i]
-      endGame = true if cells.x is nx and cells.y is ny
+      isEndGame = true if cells.x is nx and cells.y is ny
       i++
 
-    # TODO: Add end game view
-    @pause() if endGame
+    @endGame() if isEndGame
+
+  handleClickEvent: (event)=>
+    event.preventDefault
+    return if @btnCollection.length is 0
+
+    x = event.pageX - @$canvas[0].offsetLeft
+    y = event.pageY - @$canvas[0].offsetTop
+
+    @btnCollection.forEach (col)->
+      withinX = col.left < x and col.left + col.width > x
+      withinY = col.top < y and col.top + col.height > y
+
+      col.action() if withinX and withinY
 
   # Updates the snake position,
   update: ()=>
@@ -238,4 +403,4 @@ class DrkStrife.games.Snake
 
 $ ->
   window.app = new DrkStrife.games.Snake('#viewport')
-  app.startGame()
+  app.prepareGame()
