@@ -1,6 +1,11 @@
 @import '../lib/**/*';
 
 .home-container {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-direction: column;
+  justify-content: space-between;
+
   article {
     border-bottom: 1px dashed $border;
     padding: 5px 0;
