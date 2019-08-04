@@ -1,10 +1,3 @@
-GIT
-  remote: git@github.com:watermelonexpress/benchprep-tagster.git
-  revision: f26c6ef0d94a16cfa10c15993085f383f56ebfb3
-  specs:
-    benchprep_tagster (0.1.4)
-      colored
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -56,7 +49,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    colored (1.2)
     colored2 (3.1.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
@@ -180,7 +172,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  benchprep_tagster!
   byebug
   coffee-rails (~> 4.2.2)
   colored2 (~> 3.1.2)
@@ -204,4 +195,4 @@ RUBY VERSION
    ruby 2.6.2p47
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

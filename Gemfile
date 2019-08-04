@@ -39,5 +39,4 @@ end
 
 # Use debugger
 gem 'byebug', group: [:development, :test]
-gem 'benchprep_tagster', git: 'git@github.com:watermelonexpress/benchprep-tagster.git', group: [:development], require: false
 
