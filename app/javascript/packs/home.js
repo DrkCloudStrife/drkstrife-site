@@ -17,15 +17,16 @@
 
 import TurbolinksAdapter from 'vue-turbolinks'
 import Vue from 'vue'
-import Main from '../src/main.vue'
+import Blog from '../src/blog/main.vue'
 
 Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load', () => {
-  const app = new Vue({
-    el: '#main',
-    data: () => {
-      return {}
-    }
-  })
+  var element = document.getElementById("home-blog")
+  if (element != null) {
+    const app = new Vue({
+      el: element,
+      render: h => h(Blog)
+    })
+  }
 });
