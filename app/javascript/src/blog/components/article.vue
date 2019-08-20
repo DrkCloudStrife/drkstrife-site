@@ -1,11 +1,22 @@
 <template>
-  <article>
-    <h2>{{ titleLocal }}</h2>
-    {{ markdownLocal }}
-  </article>
+  <div>
+    <section>
+      <router-link :to="{ name: 'Home' }">
+        <i class="fa fa-caret-left"></i> Go Back
+      </router-link>
+    </section>
+
+    <article class="article-container">
+      <header class="text-header">
+        <h2 class="title">{{ titleLocal }}</h2>
+      </header>
+      <vue-markdown class="container" :source='markdownLocal'></vue-markdown>
+    </article>
+  </div>
 </template>
 
 <script>
+  import VueMarkdown from 'vue-markdown'
   const apiPath = "/api/v1/articles/";
 
   export default {
@@ -50,6 +61,10 @@
         })
       },
 
+    },
+
+    components: {
+      VueMarkdown
     }
 
   }

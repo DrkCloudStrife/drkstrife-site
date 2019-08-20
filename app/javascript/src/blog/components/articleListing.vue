@@ -8,9 +8,21 @@
       {{ error }}
     </div>
 
-    <ul v-for="article in articles">
-      <router-link :to="{ name: 'Article', params: article }">{{article.title}}</router-link>
-    </ul>
+    <div v-for="article in articles">
+      <article>
+        <div class="image-container pull-left">
+          <i class="fa fa-file-text-o"></i>
+        </div>
+        <div class="link-container">
+          <header class="text-header">
+            <h2 class="title">
+              <router-link :to="{ name: 'Article', params: article }">{{article.title}}</router-link>
+            </h2>
+          </header>
+          <p>{{ article.createdAt || 'N/A' }}</p>
+        </div>
+      </article>
+    </div>
   </div>
 </template>
 

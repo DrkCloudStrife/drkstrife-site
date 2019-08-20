@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # articles
   get '/articles' => redirect('/')
-  get '/:article', to: 'home#index'
+  get '/articles/:article', to: 'home#index'
 
   get '/projects', to: 'projects#index'
   get '/projects/:project', to: 'projects#show', as: :project

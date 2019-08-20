@@ -6,10 +6,13 @@ module Api
 
       def index
         path = Rails.root.join('app/views').join(ARTICLE_DATA_PATH).join("*.json")
+
         articles = Dir.glob(path).inject([]) do |memo, article|
           memo << JSON.parse(Pathname.new(article).read)
           memo
         end
+
+        # TODO: offset articles based on pagination once implemented
 
         render json: articles
       end

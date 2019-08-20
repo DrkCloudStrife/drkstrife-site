@@ -5,15 +5,11 @@
 </template>
 
 <script>
-
-// TODO: Move to a config
-const apiHost = ""
-
-export default {
-  data: () => {
-    return { }
+  export default {
+    data: () => {
+      return { }
+    }
   }
-}
 </script>
 
 <style scoped>
