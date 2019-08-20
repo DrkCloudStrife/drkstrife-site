@@ -11,12 +11,12 @@
     <div v-for="article in articles">
       <article>
         <div class="image-container pull-left">
-          <i class="fa fa-file-text-o"></i>
+          <i class="fa" :class="article.linkIcon"></i>
         </div>
         <div class="link-container">
           <header class="text-header">
             <h2 class="title">
-              <router-link :to="{ name: 'Article', params: article }">{{article.title}}</router-link>
+              <router-link :to="{ name: 'Article', params: article }">{{article.linkText || article.title}}</router-link>
             </h2>
           </header>
           <p>{{ article.createdAt || 'N/A' }}</p>
@@ -46,7 +46,7 @@
       fetchData () {
         this.loading = true
 
-        fetch(apiEndpoint).then((response) => {
+        fetch(apiEndpoint, {cache: "no-cache"}).then((response) => {
           if(!response.ok) {
             throw Error(response.statusText)
           }

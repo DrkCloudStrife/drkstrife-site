@@ -10,7 +10,13 @@
       <header class="text-header">
         <h2 class="title">{{ titleLocal }}</h2>
       </header>
-      <vue-markdown class="container" :source='markdownLocal'></vue-markdown>
+      <div class="container">
+        <div v-if="imageLinkLocal" class="header-image">
+          <img :src="imageLinkLocal"/>
+        </div>
+
+        <vue-markdown :source='markdownLocal'></vue-markdown>
+      </div>
     </article>
   </div>
 </template>
@@ -25,7 +31,8 @@
       slug: String,
       title: String,
       markdown: String,
-      createdAt: Date
+      imageLink: String,
+      createdAt: String
     },
 
     data () {
@@ -34,6 +41,7 @@
         slugLocal: this.slug,
         titleLocal: this.title,
         markdownLocal: this.markdown,
+        imageLinkLocal: this.imageLink,
         createdAtLocal: this.createdAt
       }
     },

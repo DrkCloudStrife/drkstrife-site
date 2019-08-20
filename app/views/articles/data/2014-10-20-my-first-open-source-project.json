@@ -1,0 +1,9 @@
+{
+  "id": 3,
+  "title": "My first open source project",
+  "markdown": "I have decided to make my site's code an open source project. I've been thinking on creating an open source project to experiment and create beautiful things. Well why don't I start with my very first site?  This will also help me keep motivated on keeping code clean... :)\r\n\r\n If you're interested in viewing the source code of my page, you can do so by visiting my [github page](https://github.com/DrkCloudStrife/drkstrife-site).  That's where I will keep the code up to date, and hopefully bug free. I'm not sure about open source licensing nor if this source code will be helpful to anyone, but if I get to that I'll most likely use MIT license or something. For now, the code is avaible for everyone to see.",
+  "linkIcon": "fa-file-text-o",
+  "linkText": "",
+  "imageLink": "",
+  "createdAt": "Oct 20, 2014"
+}
