@@ -15,17 +15,6 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import TurbolinksAdapter from 'vue-turbolinks'
-import Vue from 'vue'
-import Main from '../src/main.vue'
+import Blog from '../src/blog/main.js'
 
-Vue.use(TurbolinksAdapter)
-
-document.addEventListener('turbolinks:load', () => {
-  const app = new Vue({
-    el: '#main',
-    data: () => {
-      return {}
-    }
-  })
-});
+Blog

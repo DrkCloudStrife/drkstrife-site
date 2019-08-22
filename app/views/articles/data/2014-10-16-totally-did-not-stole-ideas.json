@@ -1,0 +1,9 @@
+{
+  "id": 2,
+  "title": "Totally did not stole ideas",
+  "markdown": "I just wanted to be clear, I totally did not steal design ideas from [Erik Schneider](http://schneiderik.com) nor from [Hide Obara](http://www.hideobara.com/).\r\n\r\n What kind of person would I be if I didn't had my own creativity right? I mean, just look at their site and compare to mine. Nothing alike, I swear!\r\n\r\n Just kidding, I did took a lot of ideas from their sites to build my page as it currently is, but that doesn't mean is final. As I mentioned in my previous post, I will slowly start enhancing the site.  A few of the things I want to add are:\r\n\r\n * Responsiveness (for mobile devices)\r\n * Internationalization  (for funsies)\r\n * Pagination (for when I hit article #15!)\r\n * Categories (to separate work from fun)",
+  "linkIcon": "fa-file-text-o",
+  "linkText": "",
+  "imageLink": "",
+  "createdAt": "Oct 16, 2014"
+}

@@ -1,0 +1,9 @@
+{
+  "id": 11,
+  "title": "Changes under the hood",
+  "markdown": "It's been a while since I've posted something. I've been busy with work but at the same time trying new frameworks. I have made some changes under the hood of my site. I want to start using flex box and Vue together with Rails. This will allow me to experiment with different tools and share my experiences.\n\r\n\rLately I've been making some improvements to the snake JavaScript application. I want to move it to a Vue app so I can remove any dependencies of jQuery on the site entirely. Specially since I've mainly been using it for dom manipulation. I want to challenge myself to use Vue with Turbolinks as multiple single page apps. Hopefully everything works well, but this is something that I will be doing on my free time.\r\n\n\rFor now, I have been working on re-creating the homepage in Vue and want my articles in Vue components as well. I'm trying to figure out what is the best option on writing articles without a database. I believe that once I am able to streamline app features with my articles, probably a JSON file, I will create examples so that they can be extracted and cloned for general use.\r\n\n\rOn a side note, I'm still playing Destiny 2. I enjoy playing with the clan members, even though lately I haven't had much time to play with them as much as before. I'm glad that there are a lot of people in the clan that help each other out and follow the same culture my friend and I set since the beginning. I know games can sometimes get frustrating or feeling like hitting a brick wall, but as long as you enjoy them, is what really matters.",
+  "linkIcon": "fa-file-text-o",
+  "linkText": "",
+  "imageLink": "",
+  "createdAt": "Aug 04, 2019"
+}
