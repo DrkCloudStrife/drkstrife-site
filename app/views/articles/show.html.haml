@@ -1,8 +1,0 @@
-%section
-  = link_to root_path do
-    %i.fa.fa-caret-left
-    Go Back
-
-%article.article-container
-  = render @current_page rescue not_found
-  = render 'layouts/shared/authorship'
