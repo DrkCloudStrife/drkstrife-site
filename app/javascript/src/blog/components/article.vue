@@ -12,7 +12,7 @@
       </header>
       <div class="container">
         <div v-if="imageLinkLocal" class="header-image">
-          <img :src="imageLinkLocal"/>
+          <img :src="require(`images/${ this.imageLinkLocal}`)" :alt="imageAlt()"/>
         </div>
 
         <vue-markdown :source='markdownLocal'></vue-markdown>
@@ -23,7 +23,7 @@
 
 <script>
   import VueMarkdown from 'vue-markdown'
-  const apiPath = "/api/v1/articles/";
+  const apiPath = "/api/v1/articles/"
 
   export default {
     props: {
@@ -42,7 +42,7 @@
         titleLocal: this.title,
         markdownLocal: this.markdown,
         imageLinkLocal: this.imageLink,
-        createdAtLocal: this.createdAt
+        createdAtLocal: this.createdAt,
       }
     },
 
@@ -64,10 +64,17 @@
           for(var item of Object.keys(data)) {
             this[`${item}Local`] = data[item]
           }
+
+          return data
         }).catch((error) => {
           console.log(error)
+          return error
         })
       },
+
+      imageAlt () {
+        return `Image of ${this.titleLocal}`
+      }
 
     },
 
