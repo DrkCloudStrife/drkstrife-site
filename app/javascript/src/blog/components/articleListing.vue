@@ -9,7 +9,7 @@
     </div>
 
     <div v-for="article in articles">
-      <article>
+      <article :id="article.id">
         <div class="image-container pull-left">
           <i class="fa" :class="article.linkIcon"></i>
         </div>
