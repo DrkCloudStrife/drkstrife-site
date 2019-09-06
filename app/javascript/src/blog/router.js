@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router'
-import Article from './components/article';
-import ArticleListing from './components/articleListing';
+import Article from './components/Article';
+import ArticleListing from './components/ArticleListing';
 
 const routes = [
   {
@@ -18,7 +18,10 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  routes: routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router

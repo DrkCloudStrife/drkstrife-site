@@ -27,8 +27,6 @@
 </template>
 
 <script>
-  const apiEndpoint = "/api/v1/articles.json";
-
   export default {
     data () {
       return {
@@ -39,24 +37,20 @@
     },
 
     mounted () {
-      this.fetchData()
+      this.loading = true
+
+      if (this.$store.getters.articles.filter((article) => article.slug !== undefined).length !== 0) {
+        this.loadData()
+      }
+      else {
+        this.$store.dispatch('fetchArticles').then(this.loadData)
+      }
     },
 
     methods: {
-      fetchData () {
-        this.loading = true
-
-        fetch(apiEndpoint, {cache: "no-cache"}).then((response) => {
-          if(!response.ok) {
-            throw Error(response.statusText)
-          }
-          return response.json()
-        }).then((data) => {
-          this.loading = false
-          this.articles = data
-        }).catch((error) => {
-          console.log(error)
-        })
+      loadData () {
+        this.articles = this.$store.getters.articles
+        this.loading = false
       }
     }
   }
