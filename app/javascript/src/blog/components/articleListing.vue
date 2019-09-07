@@ -27,6 +27,9 @@
 </template>
 
 <script>
+  import RegisterStoreModule from '../store/mixins/registerStoreModule'
+  import Articles from '../store/modules/article'
+
   export default {
     data () {
       return {
@@ -36,14 +39,20 @@
       }
     },
 
+    mixins: [RegisterStoreModule],
+
+    created () {
+      this.registerStoreModule('articles', Articles)
+    },
+
     mounted () {
       this.loading = true
 
-      if (this.$store.getters.articles.filter((article) => article.slug !== undefined).length !== 0) {
-        this.loadData()
+      if (this.$store.getters.articles.length === 0) {
+        this.$store.dispatch('fetchArticles').then(this.loadData)
       }
       else {
-        this.$store.dispatch('fetchArticles').then(this.loadData)
+        this.loadData()
       }
     },
 

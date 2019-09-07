@@ -23,7 +23,8 @@
 
 <script>
   import VueMarkdown from 'vue-markdown'
-  const apiPath = "/api/v1/articles/"
+  import RegisterStoreModule from '../store/mixins/registerStoreModule'
+  import Articles from '../store/modules/article'
 
   export default {
     props: {
@@ -44,6 +45,12 @@
         imageLinkLocal: this.imageLink,
         createdAtLocal: this.createdAt,
       }
+    },
+
+    mixins: [RegisterStoreModule],
+
+    created () {
+      this.registerStoreModule('articles', Articles)
     },
 
     mounted () {

@@ -3,13 +3,6 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-// modules
-import Articles from './modules/article'
-
-const store = new Vuex.Store({
-  modules: {
-    articles: Articles
-  },
-})
+const store = new Vuex.Store({})
 
 export default store

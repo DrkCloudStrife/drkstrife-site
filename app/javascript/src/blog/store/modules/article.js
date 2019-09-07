@@ -53,8 +53,6 @@ const Article = {
 
           return response.json()
         }).then((data) => {
-          state.commit('addArticle', data)
-
           resolve(data)
         }).catch((error) => {
           console.error(error)
