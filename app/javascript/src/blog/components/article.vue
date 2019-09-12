@@ -23,7 +23,8 @@
 
 <script>
   import VueMarkdown from 'vue-markdown'
-  const apiPath = "/api/v1/articles/"
+  import RegisterStoreModule from '../store/mixins/registerStoreModule'
+  import Articles from '../store/modules/article'
 
   export default {
     props: {
@@ -46,30 +47,24 @@
       }
     },
 
+    mixins: [RegisterStoreModule],
+
+    created () {
+      this.registerStoreModule('articles', Articles)
+    },
+
     mounted () {
       if (typeof this.title === "undefined") {
-        this.fetchData()
+        this.$store.dispatch('fetchArticle', { slug: this.slug }).then(this.updateLocalData)
       }
     },
 
     methods: {
-      fetchData () {
-        fetch(`${apiPath + this.slug}.json`).then((response) => {
-          if(!response.ok) {
-             throw Error(response.statusText)
-          }
 
-          return response.json()
-        }).then((data) => {
-          for(var item of Object.keys(data)) {
-            this[`${item}Local`] = data[item]
-          }
-
-          return data
-        }).catch((error) => {
-          console.log(error)
-          return error
-        })
+      updateLocalData (data) {
+        for(var item of Object.keys(data)) {
+          this[`${item}Local`] = data[item]
+        }
       },
 
       imageAlt () {
