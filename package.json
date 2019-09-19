@@ -20,6 +20,6 @@
     "webpack-dev-server": "^3.8.0"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha-webpack --webpack-config config/webpack/test.js test/javascript/**/*.spec.js --recursive"
+    "test": "NODE_ENV=test mocha-webpack --recursive --webpack-config config/webpack/test.js test/javascript/**/*"
   }
 }
