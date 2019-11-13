@@ -1,4 +1,7 @@
 {
+  "version": "0.1.0",
+  "description": "DrkStrife's personal site webpack projects.",
+  "main": "app/javascript/src/blog/main.js",
   "dependencies": {
     "@rails/webpacker": "^4.0.7",
     "babel-runtime": "^6.26.0",
@@ -12,7 +15,11 @@
     "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "lodash.template": "^4.5.0",
+    "mocha": "^6.2.0",
+    "mochapack": "^1.1.11",
     "webpack-dev-server": "^3.8.0"
+  },
+  "scripts": {
+    "test": "mochapack --recursive --webpack-config config/webpack/test.js test/javascript/*"
   }
 }
