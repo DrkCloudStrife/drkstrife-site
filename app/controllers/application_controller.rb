@@ -39,9 +39,7 @@ private
   def detect_variant
     request.variant = case request.user_agent
       when (/iPhone/i)
-        :phone
       when (/Android.*mobile|mobile.*Android/i)
-        :phone
       when (/Windows Phone/i)
         :phone
       end
