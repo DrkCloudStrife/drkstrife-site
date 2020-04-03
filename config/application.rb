@@ -37,5 +37,13 @@ module DrkstrifeSite
     config.i18n.fallbacks = true
 
     config.server_hostname = Socket.gethostname.downcase.hash
+
+    config.before_configuration do
+      env_file = Rails.root + 'config/local_env.yml'
+      YAML.load(env_file.open).each do |key, value|
+        ENV[key.to_s] = value
+      end if env_file.exist?
+    end
+
   end
 end
