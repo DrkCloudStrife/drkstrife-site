@@ -38,5 +38,8 @@ group :production do
 end
 
 # Use debugger
-gem 'byebug', group: [:development, :test]
+group :development, :test do
+  gem 'byebug'
+  gem 'pry-remote'
+end
 
