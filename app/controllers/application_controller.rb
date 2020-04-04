@@ -5,9 +5,10 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :detect_variant
 
+  helper_method :active_tab
+  helper_method :authenticated?
   helper_method :current_locale
   helper_method :not_found
-  helper_method :active_tab
 
   class_attribute :active_tab
 
@@ -16,6 +17,10 @@ class ApplicationController < ActionController::Base
   end
 
 protected
+
+  def authenticated?
+    session[:auth_session] == 'admin'
+  end
 
   def current_locale
     params[:locale] || I18n.default_locale
@@ -32,7 +37,7 @@ private
       I18n.locale = current_locale.to_s
       cookies[:locale] = current_locale unless (cookies[:locale] && cookies[:locale] == current_locale)
     rescue Exception => e
-      raise ActionController::RoutingError.new('Not Found')
+      return not_found
     end
   end
 
