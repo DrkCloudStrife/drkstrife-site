@@ -1,6 +1,12 @@
 module Admin
   class HomeController < ApplicationController
+    active_tab :admin
+
     before_action :require_authentication
+
+    def admin
+      self.class.active_tab = :admin
+    end
 
     def logout
       reset_session
