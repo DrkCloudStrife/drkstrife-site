@@ -1,0 +1,4 @@
+.container.admin-home-container
+  #article-list
+    - @articles.each_with_index do |article, idx|
+      %p= "#{article['id']} #{article['title']}"

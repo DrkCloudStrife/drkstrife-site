@@ -4,8 +4,9 @@ module Admin
 
     before_action :require_authentication
 
-    def admin
+    def index
       self.class.active_tab = :admin
+      @articles = Articles.list_articles
     end
 
     def logout
