@@ -25,3 +25,4 @@ config/local_env.yml
 yarn-debug.log*
 .yarn-integrity
 .tmp
+.byebug_history
