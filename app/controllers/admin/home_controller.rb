@@ -5,7 +5,7 @@ module Admin
     before_action :require_authentication
 
     def index
-      self.class.active_tab = :admin
+      self.class.active_tab = :admin_home
       @articles = Articles.list_articles
     end
 
