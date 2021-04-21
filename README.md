@@ -7,6 +7,7 @@ little playground to prototype ideas. Hope you find something useful here.
 ## Pre-requisites
 
 * rvm
+* nvm
 * yarn
 
 ## Starting app
