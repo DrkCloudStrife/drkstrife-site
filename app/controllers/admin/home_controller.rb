@@ -2,11 +2,14 @@ module Admin
   class HomeController < ApplicationController
     active_tab :admin
 
-    before_action :require_authentication
+    before_action :require_authentication, except: [:logout]
 
     def index
       self.class.active_tab = :admin_home
       @articles = Articles.list_articles
+    end
+
+    def edit
     end
 
     def logout
