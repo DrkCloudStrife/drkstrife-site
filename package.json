@@ -3,7 +3,7 @@
   "description": "DrkStrife's personal site webpack projects.",
   "main": "app/javascript/src/blog/main.js",
   "dependencies": {
-    "@rails/webpacker": "^4.2.3",
+    "@rails/webpacker": "^5.4.3",
     "babel-runtime": "^6.26.0",
     "es6-promise": "^4.2.8",
     "vue": "^2.6.11",
