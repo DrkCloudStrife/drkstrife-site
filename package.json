@@ -17,7 +17,7 @@
   "devDependencies": {
     "mocha": "^6.2.3",
     "mochapack": "^1.1.13",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.3"
   },
   "scripts": {
     "test": "mochapack --recursive --webpack-config config/webpack/test.js test/javascript/*"
