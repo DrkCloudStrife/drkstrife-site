@@ -29,3 +29,11 @@
         %li= link_to t('navigation.about'),
           about_path,
           class: active_tab == :about ? 'active' : nil
+
+        - if authenticated?
+          %li= link_to t('navigation.admin'),
+            admin_path,
+            class: active_tab == :admin_home ? 'active' : nil
+          %li= link_to t('navigation.log_out'),
+            admin_logout_path,
+            class: active_tab == :logout ? 'active' : nil

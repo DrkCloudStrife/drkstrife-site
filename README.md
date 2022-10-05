@@ -1,12 +1,14 @@
 drkstrife.com
 ==============
 
-This is the application for my personal site, drkstrife.com
+This is the application for my personal site, drkstrife.com, which I use as my
+little playground to prototype ideas. Hope you find something useful here.
 
 ## Pre-requisites
 
 * rvm
 * nvm
+* yarn
 
 ## Starting app
 

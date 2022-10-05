@@ -10,6 +10,13 @@ Rails.application.routes.draw do
   get '/projects', to: 'projects#index'
   get '/projects/:project', to: 'projects#show', as: :project
 
+  # Administration
+  namespace :admin do
+    get '/', to: 'home#index'
+    get '/edit/:slug', to: 'home#edit'
+    get '/logout', to: 'home#logout'
+  end
+
   # API
   namespace :api do
     namespace :v1 do
