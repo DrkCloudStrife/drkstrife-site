@@ -26,7 +26,7 @@ gem 'webpacker', '~> 4.0.7'
 gem 'pry-rails', '~> 0.3.6'
 gem 'colored2', '~> 3.1.2'
 
-gem 'puma', '~> 3.12.6'
+gem 'puma', '~> 4.3.12'
 
 # route utility
 gem 'routing-filter', '~> 0.6.2'
