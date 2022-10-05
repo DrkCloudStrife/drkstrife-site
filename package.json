@@ -7,10 +7,10 @@
     "@babel/runtime": "^7.19.0",
     "es6-promise": "^4.2.8",
     "vue": "^2.7.10",
-    "vue-loader": "^15.9.1",
+    "vue-loader": "^15.10.0",
     "vue-markdown": "^2.2.4",
-    "vue-router": "^3.1.6",
-    "vue-template-compiler": "^2.6.11",
+    "vue-router": "^3.6.5",
+    "vue-template-compiler": "^2.7.10",
     "vue-turbolinks": "^2.1.0",
     "vuex": "^3.1.3"
   },
