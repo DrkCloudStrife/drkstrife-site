@@ -6,7 +6,6 @@ module Admin
 
     def index
       self.class.active_tab = :admin_home
-      @articles = Articles.list_articles
     end
 
     def edit
