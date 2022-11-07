@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.7.6'
 
-gem 'rails', '5.2.4.5'
+gem 'rails', '5.2.8.1'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -26,7 +26,7 @@ gem 'webpacker', '~> 4.0.7'
 gem 'pry-rails', '~> 0.3.6'
 gem 'colored2', '~> 3.1.2'
 
-gem 'puma', '~> 3.12.6'
+gem 'puma', '~> 4.3.12'
 
 # route utility
 gem 'routing-filter', '~> 0.6.2'
