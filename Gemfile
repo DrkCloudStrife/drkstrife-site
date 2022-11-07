@@ -7,7 +7,7 @@ gem 'rails', '5.2.4.5'
 gem 'uglifier', '>= 1.3.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 5.1.0'
+gem 'turbolinks', '~> 5.2.1'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development do
