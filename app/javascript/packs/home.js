@@ -16,5 +16,3 @@
 // const imagePath = (name) => images(name, true)
 
 import Blog from '../src/blog/main.js'
-
-Blog
