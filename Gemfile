@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.7.6'
 
-gem 'rails', '5.2.8.1'
+# gem 'rails', '< 6'
+gem 'rails', '~> 6.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -43,3 +44,5 @@ group :development, :test do
   gem 'pry-remote'
 end
 
+
+gem "dockerfile-rails", ">= 1.2", :group => :development
