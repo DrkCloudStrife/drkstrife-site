@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.7.6'
 
-gem 'rails', '5.2.8.1'
+# gem 'rails', '< 6'
+gem 'rails', '~> 6.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -16,12 +17,12 @@ group :development do
 end
 # gem 'spring', group: :development
 
-gem 'haml', '~> 5.0.4'
+gem 'haml', '~> 5.2.2'
 gem 'sass-rails', '~> 5.0.7'
 gem 'jquery-rails', '~> 4.3.3'
 gem 'coffee-rails', '~> 4.2.2'
 gem 'redcarpet', '~> 3.5.1'
-gem 'webpacker', '~> 4.0.7'
+gem 'webpacker', '>= 5.4.4'
 
 gem 'pry-rails', '~> 0.3.6'
 gem 'colored2', '~> 3.1.2'
@@ -43,3 +44,5 @@ group :development, :test do
   gem 'pry-remote'
 end
 
+
+gem "dockerfile-rails", ">= 1.2", :group => :development
