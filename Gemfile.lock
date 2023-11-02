@@ -125,6 +125,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
+    pg (1.5.4)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -240,6 +241,7 @@ DEPENDENCIES
   haml (~> 5.2.2)
   jquery-rails (~> 4.3.3)
   listen (~> 3.1.5)
+  pg (~> 1.5, >= 1.5.4)
   pry-rails (~> 0.3.6)
   pry-remote
   puma (~> 4.3.12)
