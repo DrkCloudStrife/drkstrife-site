@@ -72,6 +72,7 @@ GEM
     coffee-script-source (1.12.2)
     colored2 (3.1.2)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     dockerfile-rails (1.2.5)
@@ -120,8 +121,11 @@ GEM
     nokogiri (1.14.2)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
+    nokogiri (1.14.2-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
+    pg (1.5.4)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -158,11 +162,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.5.0)
       loofah (~> 2.19, >= 2.19.1)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (6.1.7.2)
       actionpack (= 6.1.7.2)
       activesupport (= 6.1.7.2)
@@ -174,6 +173,10 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
+    redis (5.0.8)
+      redis-client (>= 0.17.0)
+    redis-client (0.18.0)
+      connection_pool
     routing-filter (0.6.3)
       actionpack (>= 4.2)
       activesupport (>= 4.2)
@@ -221,6 +224,7 @@ GEM
     zeitwerk (2.6.7)
 
 PLATFORMS
+  aarch64-linux
   ruby
   x86_64-linux
 
@@ -232,13 +236,13 @@ DEPENDENCIES
   haml (~> 5.2.2)
   jquery-rails (~> 4.3.3)
   listen (~> 3.1.5)
+  pg (~> 1.5, >= 1.5.4)
   pry-rails (~> 0.3.6)
   pry-remote
   puma (~> 4.3.12)
   rails (~> 6.0)
-  rails_12factor
-  rails_serve_static_assets (~> 0.0.5)
   redcarpet (~> 3.5.1)
+  redis (~> 5.0)
   routing-filter (~> 0.6.2)
   sass-rails (~> 5.0.7)
   spring

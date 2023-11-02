@@ -26,5 +26,6 @@
   },
   "scripts": {
     "test": "mochapack --recursive --webpack-config config/webpack/test.js test/javascript/*"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
