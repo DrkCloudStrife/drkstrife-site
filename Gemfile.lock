@@ -72,6 +72,7 @@ GEM
     coffee-script-source (1.12.2)
     colored2 (3.1.2)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     dockerfile-rails (1.2.5)
@@ -119,6 +120,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.14.2)
       mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
+    nokogiri (1.14.2-aarch64-linux)
       racc (~> 1.4)
     nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
@@ -174,6 +177,10 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
+    redis (5.0.8)
+      redis-client (>= 0.17.0)
+    redis-client (0.18.0)
+      connection_pool
     routing-filter (0.6.3)
       actionpack (>= 4.2)
       activesupport (>= 4.2)
@@ -221,6 +228,7 @@ GEM
     zeitwerk (2.6.7)
 
 PLATFORMS
+  aarch64-linux
   ruby
   x86_64-linux
 
@@ -239,6 +247,7 @@ DEPENDENCIES
   rails_12factor
   rails_serve_static_assets (~> 0.0.5)
   redcarpet (~> 3.5.1)
+  redis (~> 5.0)
   routing-filter (~> 0.6.2)
   sass-rails (~> 5.0.7)
   spring
