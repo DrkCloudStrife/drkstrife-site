@@ -20,6 +20,7 @@ group :development do
 end
 # gem 'spring', group: :development
 
+# FE Gems
 gem 'coffee-rails', '~> 4.2.2'
 gem 'haml', '~> 5.2.2'
 gem 'jquery-rails', '~> 4.3.3'
@@ -30,6 +31,8 @@ gem 'webpacker', '>= 5.4.4'
 gem 'colored2', '~> 3.1.2'
 gem 'pry-rails', '~> 0.3.6'
 
+# BE Gems
+gem 'slug', '~> 4.1.1'
 gem 'pg', '~> 1.5', '>= 1.5.4'
 gem 'puma', '~> 4.3.12'
 

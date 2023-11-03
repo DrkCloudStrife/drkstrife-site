@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2023_09_18_033402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title", comment: "The article's title"
+    t.string "slug", comment: "Unique slug for URL access"
+    t.text "body", comment: "Article content"
+    t.text "link_fa_icon", comment: "Link Font Awesome icon"
+    t.text "link_text", comment: "Link text"
+    t.boolean "published", comment: "Flag to determine whether the article is visible in the home page"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end
