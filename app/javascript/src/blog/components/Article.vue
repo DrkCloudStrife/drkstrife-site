@@ -15,7 +15,7 @@
           <img :src="require(`images/${ this.imageLinkLocal}`)" :alt="imageAlt()"/>
         </div>
 
-        <vue-markdown :source='markdownLocal'></vue-markdown>
+        <vue-markdown :source='bodyLocal'></vue-markdown>
       </div>
     </article>
   </div>
@@ -31,9 +31,9 @@
       id: Number,
       slug: String,
       title: String,
-      markdown: String,
-      imageLink: String,
-      createdAt: String
+      body: String,
+      image_link: String,
+      created_at: String
     },
 
     data () {
@@ -41,9 +41,9 @@
         idLocal: this.id,
         slugLocal: this.slug,
         titleLocal: this.title,
-        markdownLocal: this.markdown,
-        imageLinkLocal: this.imageLink,
-        createdAtLocal: this.createdAt,
+        bodyLocal: this.body,
+        image_linkLocal: this.image_link,
+        created_atLocal: this.created_at,
       }
     },
 

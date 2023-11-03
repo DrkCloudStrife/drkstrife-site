@@ -11,15 +11,15 @@
     <div v-for="article in articles">
       <article :id="article.id">
         <div class="image-container pull-left">
-          <i class="fa" :class="article.linkIcon"></i>
+          <i class="fa" :class="article.link_fa_icon"></i>
         </div>
         <div class="link-container">
           <header class="text-header">
             <h2 class="title">
-              <router-link :to="{ name: 'Article', params: article }">{{article.linkText || article.title}}</router-link>
+              <router-link :to="{ name: 'Article', params: article }">{{article.link_text || article.title}}</router-link>
             </h2>
           </header>
-          <p>{{ article.createdAt || 'N/A' }}</p>
+          <p>{{ publishedDate(article.created_at) || 'N/A' }}</p>
         </div>
       </article>
     </div>
@@ -31,6 +31,7 @@
   import Articles from '../store/modules/article'
 
   export default {
+    inject: ['$dayJS'],
     data () {
       return {
         articles: [],
@@ -60,6 +61,10 @@
       loadData () {
         this.articles = this.$store.getters.articles
         this.loading = false
+      },
+
+      publishedDate(createdAt) {
+        return this.$dayJS(createdAt).format("MMM DD, YYYY")
       }
     }
   }

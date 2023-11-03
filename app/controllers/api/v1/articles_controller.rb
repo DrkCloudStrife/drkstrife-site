@@ -11,16 +11,10 @@ module Api
 
       def show
         begin
-          render file: "#{Articles::ARTICLE_DATA_PATH}#{article_file}.json", content_type: "application/json", layout: false, cached: true
-        rescue
+          render json: Articles.published.find_by_slug!(params[:id])
+        rescue ActiveRecord::RecordNotFound
           head :not_found
         end
-      end
-
-    private
-
-      def article_file
-        params.require(:id)
       end
 
     end

@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/runtime": "^7.19.0",
     "@rails/webpacker": "5.4.4",
+    "dayjs": "^1.11.10",
     "es6-promise": "^4.2.8",
     "vue": "^2.7.10",
     "vue-loader": "^15.10.0",
