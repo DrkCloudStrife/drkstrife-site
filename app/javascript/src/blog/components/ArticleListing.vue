@@ -64,7 +64,7 @@
       },
 
       publishedDate(createdAt) {
-        return this.$dayJS(createdAt).format("MMM DD, YYYY")
+        return this.$dayJS(createdAt).utc().format("MMM DD, YYYY")
       }
     }
   }

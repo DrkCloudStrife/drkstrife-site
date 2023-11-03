@@ -1,10 +1,12 @@
 import 'es6-promise/auto'
 
 import dayjs from 'dayjs'
+import dayjs_utc from 'dayjs/plugin/utc'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueMarkdown from 'vue-markdown'
 
+dayjs.extend(dayjs_utc)
 Vue.use(VueRouter)
 Vue.use(VueMarkdown)
 
