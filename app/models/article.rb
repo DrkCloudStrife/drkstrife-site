@@ -1,4 +1,6 @@
-class Articles < ApplicationRecord
+class Article < ApplicationRecord
+
+  has_one_attached :banner_image
 
   slug :title_for_slug
 

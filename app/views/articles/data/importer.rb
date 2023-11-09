@@ -10,6 +10,18 @@ StaticArticles.list_articles.reverse.each do |article_data|
     created_at: Date.parse(article_data["createdAt"])
   }
 
-  article = Articles.new(payload)
+  if article_data['imageLink'].present?
+    attachment = Pathname.new('app/assets/images')
+    attachment = attachment.join(article_data['imageLink'])
+  end
+
+  article = Article.find_or_initialize_by(payload)
+
+  if attachment && !article.banner_image.present?
+    article.banner_image.attach(
+      io: attachment.open,
+      filename: attachment.basename.to_s
+    )
+  end
   article.save!
 end

@@ -3,7 +3,7 @@ module Api
     class ArticlesController < ApplicationController
 
       def index
-        @articles = Articles.list_articles
+        @articles = Article.list_articles
 
         # TODO: offset articles based on pagination once implemented
         render json: @articles
@@ -11,7 +11,7 @@ module Api
 
       def show
         begin
-          render json: Articles.published.find_by_slug!(params[:id])
+          render json: Article.published.find_by_slug!(params[:id])
         rescue ActiveRecord::RecordNotFound
           head :not_found
         end
