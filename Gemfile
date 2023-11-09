@@ -28,13 +28,14 @@ gem 'redcarpet', '~> 3.5.1'
 gem 'sass-rails', '~> 5.0.7'
 gem 'webpacker', '>= 5.4.4'
 
-gem 'colored2', '~> 3.1.2'
-gem 'pry-rails', '~> 0.3.6'
 
 # BE Gems
-gem 'slug', '~> 4.1.1'
+gem "aws-sdk-s3", require: false
+gem 'colored2', '~> 3.1.2'
 gem 'pg', '~> 1.5', '>= 1.5.4'
+gem 'pry-rails', '~> 0.3.6'
 gem 'puma', '~> 4.3.12'
+gem 'slug', '~> 4.1.1'
 
 # route utility
 gem 'routing-filter', '~> 0.6.2'
