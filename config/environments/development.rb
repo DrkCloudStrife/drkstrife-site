@@ -61,4 +61,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.active_storage.service = :local
+  # Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 end

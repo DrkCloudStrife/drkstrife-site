@@ -20,7 +20,8 @@ StaticArticles.list_articles.reverse.each do |article_data|
   if attachment && !article.banner_image.present?
     article.banner_image.attach(
       io: attachment.open,
-      filename: attachment.basename.to_s
+      filename: attachment.basename.to_s,
+      content_type: 'image/jpeg'
     )
   end
   article.save!

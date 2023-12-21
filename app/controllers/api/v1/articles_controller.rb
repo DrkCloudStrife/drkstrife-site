@@ -6,12 +6,12 @@ module Api
         @articles = Article.list_articles
 
         # TODO: offset articles based on pagination once implemented
-        render json: @articles
+        render json: @articles.map(&:decorate)
       end
 
       def show
         begin
-          render json: Article.published.find_by_slug!(params[:id])
+          render json: Article.published.find_by_slug!(params[:id]).decorate
         rescue ActiveRecord::RecordNotFound
           head :not_found
         end

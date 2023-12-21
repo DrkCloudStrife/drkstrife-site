@@ -32,6 +32,7 @@ gem 'webpacker', '>= 5.4.4'
 # BE Gems
 gem "aws-sdk-s3", require: false
 gem 'colored2', '~> 3.1.2'
+gem 'image_processing', '~> 1.12'
 gem 'pg', '~> 1.5', '>= 1.5.4'
 gem 'pry-rails', '~> 0.3.6'
 gem 'puma', '~> 4.3.12'

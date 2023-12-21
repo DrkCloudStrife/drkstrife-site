@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  include Presentable
 
   has_one_attached :banner_image
 
@@ -16,6 +17,10 @@ class Article < ApplicationRecord
 
   def title_for_slug
     [created_at.year, created_at.month, created_at.day, title].join('-')
+  end
+
+  def banner_url
+    banner_image.url
   end
 
 end
