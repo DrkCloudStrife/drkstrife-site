@@ -1,4 +1,4 @@
-@import '../lib/**/*';
+@use 'lib/colors' as *;
 
 .container {
   background-color: $background;

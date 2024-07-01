@@ -29,3 +29,6 @@ yarn-debug.log*
 .yarn-integrity
 .tmp
 .byebug_history
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
