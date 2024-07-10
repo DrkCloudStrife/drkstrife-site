@@ -19,8 +19,4 @@ class Article < ApplicationRecord
     [created_at.year, created_at.month, created_at.day, title].join('-')
   end
 
-  def banner_url
-    banner_image.url
-  end
-
 end

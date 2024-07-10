@@ -11,8 +11,8 @@
         <h2 class="title">{{ titleLocal }}</h2>
       </header>
       <div class="container">
-        <div v-if="imageLinkLocal" class="header-image">
-          <img :src="require(`images/${ this.imageLinkLocal}`)" :alt="imageAlt()"/>
+        <div v-if="banner_urlLocal" class="header-image">
+          <img :src="banner_urlLocal" :alt="imageAlt()"/>
         </div>
 
         <vue-markdown :source='bodyLocal'></vue-markdown>
@@ -32,7 +32,7 @@
       slug: String,
       title: String,
       body: String,
-      image_link: String,
+      banner_url: String,
       created_at: String
     },
 
@@ -42,7 +42,7 @@
         slugLocal: this.slug,
         titleLocal: this.title,
         bodyLocal: this.body,
-        image_linkLocal: this.image_link,
+        banner_urlLocal: this.banner_url,
         created_atLocal: this.created_at,
       }
     },

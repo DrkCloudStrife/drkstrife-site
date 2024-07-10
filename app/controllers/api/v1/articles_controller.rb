@@ -3,10 +3,10 @@ module Api
     class ArticlesController < ApplicationController
 
       def index
-        @articles = Article.list_articles
+        articles = Article.list_articles
 
         # TODO: offset articles based on pagination once implemented
-        render json: @articles.map(&:decorate)
+        render json: articles.map(&:decorate)
       end
 
       def show

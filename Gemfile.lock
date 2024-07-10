@@ -213,9 +213,9 @@ GEM
       redis-client (>= 0.17.0)
     redis-client (0.18.0)
       connection_pool
-    routing-filter (0.6.3)
-      actionpack (>= 4.2)
-      activesupport (>= 4.2)
+    routing-filter (0.7.0)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
     ruby-vips (2.2.0)
       ffi (~> 1.12)
     sass-embedded (1.77.5)
@@ -280,7 +280,7 @@ DEPENDENCIES
   rails-i18n (~> 6.0)
   redcarpet (~> 3.5.1)
   redis (~> 5.0)
-  routing-filter (~> 0.6.2)
+  routing-filter (~> 0.7.0)
   slug (~> 4.1.1)
   spring
   turbolinks (~> 5.2.1)

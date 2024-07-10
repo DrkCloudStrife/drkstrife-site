@@ -1,9 +1,11 @@
-class ArticlePresenter < SimpleDelegator
+class ArticlePresenter < Presenter
 
-  def to_json(opts = {})
-    opts.merge!(methods: :banner_url)
-    # raise opts.inspect
+  module Decorators
+    def banner_url
+      return unless self.banner_image.present?
 
-    super(opts)
+      Rails.application.routes.url_helpers.rails_blob_path(self.banner_image, only_path: true)
+    end
   end
+
 end

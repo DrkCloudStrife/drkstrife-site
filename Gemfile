@@ -39,7 +39,7 @@ gem 'puma', '~> 6.4.2'
 gem 'slug', '~> 4.1.1'
 
 # route utility
-gem 'routing-filter', '~> 0.6.2'
+gem 'routing-filter', '~> 0.7.0'
 
 # Use debugger
 group :development, :test do
