@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=2.7.6
+ARG RUBY_VERSION=3.1.6
 FROM ruby:$RUBY_VERSION-slim as base
 
 LABEL fly_launch_runtime="rails"
@@ -28,6 +28,8 @@ ARG NODE_VERSION=16.19.1
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+    ln -s /usr/local/node/bin/node /usr/local/bin/ && \
+    ln -s /usr/local/node/bin/npm /usr/local/bin/ && \
     rm -rf /tmp/node-build-master
 
 
@@ -36,11 +38,12 @@ FROM base as build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential libpq-dev node-gyp pkg-config python-is-python3
+    apt-get install --no-install-recommends -y build-essential libpq-dev node-gyp pkg-config python-is-python3 yarnpkg && \
+    ln -s /usr/bin/yarnpkg /usr/bin/yarn
 
-# Install yarn
-ARG YARN_VERSION=1.22.19
-RUN npm install -g yarn@$YARN_VERSION
+## Install yarn
+#ARG YARN_VERSION=1.22.22
+#RUN npm install -g yarn@$YARN_VERSION
 
 # Build options
 ENV PATH="/usr/local/node/bin:$PATH"
@@ -59,6 +62,7 @@ COPY --link . .
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
+# RUN SECRET_KEY_BASE=DUMMY bundle exec rake assets:precompile
 
 
 # Final stage for app image

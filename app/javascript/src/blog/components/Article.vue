@@ -11,11 +11,11 @@
         <h2 class="title">{{ titleLocal }}</h2>
       </header>
       <div class="container">
-        <div v-if="imageLinkLocal" class="header-image">
-          <img :src="require(`images/${ this.imageLinkLocal}`)" :alt="imageAlt()"/>
+        <div v-if="banner_urlLocal" class="header-image">
+          <img :src="banner_urlLocal" :alt="imageAlt()"/>
         </div>
 
-        <vue-markdown :source='markdownLocal'></vue-markdown>
+        <vue-markdown :source='bodyLocal'></vue-markdown>
       </div>
     </article>
   </div>
@@ -31,9 +31,9 @@
       id: Number,
       slug: String,
       title: String,
-      markdown: String,
-      imageLink: String,
-      createdAt: String
+      body: String,
+      banner_url: String,
+      created_at: String
     },
 
     data () {
@@ -41,9 +41,9 @@
         idLocal: this.id,
         slugLocal: this.slug,
         titleLocal: this.title,
-        markdownLocal: this.markdown,
-        imageLinkLocal: this.imageLink,
-        createdAtLocal: this.createdAt,
+        bodyLocal: this.body,
+        banner_urlLocal: this.banner_url,
+        created_atLocal: this.created_at,
       }
     },
 

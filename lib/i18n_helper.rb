@@ -2,7 +2,7 @@
 
 module I18nHelper
   def translate(key, options={})
-    translation = super(key, options.merge(raise: true))
+    translation = super(key, **options.merge(raise: true))
 
     unless !!options.fetch(:capitalize, true)
       return translation.downcase

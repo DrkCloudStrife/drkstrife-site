@@ -2,7 +2,7 @@
 # challenging myself by not using a database, this iteration will use JSON
 # files as a base, I might consider changing it to YAML. I just want to provide
 # alternatives to using a database model.
-class Articles
+class StaticArticles
 
   ARTICLE_DATA_PATH = "articles/data/"
 
@@ -31,4 +31,3 @@ class Articles
 
   end
 end
-

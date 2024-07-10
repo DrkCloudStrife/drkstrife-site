@@ -14,9 +14,16 @@ console_command = "/rails/bin/rails console"
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
-  min_machines_running = 0
+  min_machines_running = 1
   processes = ["app"]
 
 [[statics]]
   guest_path = "/rails/public"
   url_prefix = "/"
+
+[env]
+  RAILS_STORAGE = "/mnt/volume/storage"
+
+[mounts]
+  source = "storage_volume"
+  destination = "/mnt/volume"

@@ -1,4 +1,4 @@
-@import 'lib/**/*';
+@use 'lib/colors' as *;
 
 body.mobile {
   & > .container { min-width: initial; }

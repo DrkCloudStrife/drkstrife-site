@@ -3,24 +3,18 @@ module Api
     class ArticlesController < ApplicationController
 
       def index
-        @articles = Articles.list_articles
+        articles = Article.list_articles
 
         # TODO: offset articles based on pagination once implemented
-        render json: @articles
+        render json: articles.map(&:decorate)
       end
 
       def show
         begin
-          render file: "#{Articles::ARTICLE_DATA_PATH}#{article_file}.json", content_type: "application/json", layout: false, cached: true
-        rescue
+          render json: Article.published.find_by_slug!(params[:id]).decorate
+        rescue ActiveRecord::RecordNotFound
           head :not_found
         end
-      end
-
-    private
-
-      def article_file
-        params.require(:id)
       end
 
     end

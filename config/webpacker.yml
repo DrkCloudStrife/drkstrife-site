@@ -61,12 +61,12 @@ development:
   dev_server:
     https: false
     host: localhost
-    port: 8082
-    public: localhost:8082
+    port: 8080
     hmr: false
     # Inline should be set to true if using HMR
-    inline: true
-    overlay: true
+    client:
+      overlay: true
+    # inline: true
     compress: true
     disable_host_check: true
     use_local_ip: false
