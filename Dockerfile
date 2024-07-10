@@ -28,6 +28,7 @@ ARG NODE_VERSION=16.19.1
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+    ln -s /usr/local/node/bin/node /usr/local/bin/ && \
     rm -rf /tmp/node-build-master
 
 
