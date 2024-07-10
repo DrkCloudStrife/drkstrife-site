@@ -41,9 +41,9 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential libpq-dev node-gyp pkg-config python-is-python3 yarnpkg && \
     ln -s /usr/bin/yarnpkg /usr/bin/yarn
 
-# Install yarn
-ARG YARN_VERSION=1.22.19
-RUN npm install -g yarn@$YARN_VERSION
+## Install yarn
+#ARG YARN_VERSION=1.22.22
+#RUN npm install -g yarn@$YARN_VERSION
 
 # Build options
 ENV PATH="/usr/local/node/bin:$PATH"
@@ -61,8 +61,8 @@ RUN yarn install --frozen-lockfile
 COPY --link . .
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile && \
-    ./bin/rails webpacker:compile
+RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
+# RUN SECRET_KEY_BASE=DUMMY bundle exec rake assets:precompile
 
 
 # Final stage for app image
