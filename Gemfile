@@ -3,8 +3,7 @@
 source 'https://rubygems.org'
 ruby '3.1.6'
 
-# gem 'rails', '< 6'
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 6.1'
 gem 'redis', '~> 5.0'
 
 # Use Uglifier as compressor for JavaScript assets
@@ -27,6 +26,7 @@ gem 'jquery-rails', '~> 4.3.3'
 gem 'rails-i18n', '~> 6.0'
 gem 'redcarpet', '~> 3.5.1'
 gem 'webpacker', '>= 5.4.4'
+gem 'sprockets', '< 4'
 
 
 # BE Gems
