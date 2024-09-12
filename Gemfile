@@ -22,7 +22,7 @@ end
 gem "dartsass-rails", "~> 0.5.0"
 gem 'coffee-rails', '~> 4.2.2'
 gem 'haml', '~> 5.2.2'
-gem 'jquery-rails', '~> 4.3.3'
+gem 'jquery-rails', '~> 4.6.0'
 gem 'rails-i18n', '~> 6.0'
 gem 'redcarpet', '~> 3.5.1'
 gem 'webpacker', '>= 5.4.4'
