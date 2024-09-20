@@ -35,7 +35,7 @@ gem 'colored2', '~> 3.1.2'
 gem 'image_processing', '~> 1.12'
 gem 'pg', '~> 1.5', '>= 1.5.4'
 gem 'pry-rails', '~> 0.3.6'
-gem 'puma', '~> 6.4.2'
+gem 'puma', '~> 6.4.3'
 gem 'slug', '~> 4.1.1'
 
 # route utility
