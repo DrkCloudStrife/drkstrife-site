@@ -6,11 +6,14 @@ little playground to prototype ideas. Hope you find something useful here.
 
 ## Pre-requisites
 
-* rvm
+* rbenv
 * nvm
 * yarn
+* redis
+* postgresql
 
 ## Starting app
 
+* Precompile assets: `bundle exec rails dartsass:build`
 * To start app server: `bundle exec rails s`
 * To start webpack: `./bin/webpack-dev-server`
