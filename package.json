@@ -14,12 +14,10 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
-    "mocha": "^6.2.3",
     "vite": "^5.0.0",
-    "vite-plugin-ruby": "^5.1.0"
+    "vite-plugin-ruby": "^5.1.1"
   },
   "scripts": {
-    "test": "mocha --recursive test/javascript/*"
   },
   "packageManager": "yarn@1.22.22"
 }
