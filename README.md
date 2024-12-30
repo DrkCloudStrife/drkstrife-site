@@ -14,6 +14,8 @@ little playground to prototype ideas. Hope you find something useful here.
 
 ## Starting app
 
-* Precompile assets: `bundle exec rails dartsass:build`
 * To start app server: `bundle exec rails s`
-* To start webpack: `./bin/webpack-dev-server`
+* To start assets dev server: `./bin/vite dev`
+* To Precompile assets:
+    * `bundle exec rails dartsass:build`
+    * `./bin/vite build`

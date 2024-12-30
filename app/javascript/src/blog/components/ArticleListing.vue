@@ -27,8 +27,8 @@
 </template>
 
 <script>
-  import RegisterStoreModule from '../store/mixins/registerStoreModule'
-  import Articles from '../store/modules/article'
+  import RegisterStoreModule from '../store/mixins/registerStoreModule.js'
+  import Articles from '../store/modules/article.js'
 
   export default {
     inject: ['$dayJS'],
