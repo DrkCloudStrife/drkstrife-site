@@ -15,16 +15,16 @@
           <img :src="banner_urlLocal" :alt="imageAlt()"/>
         </div>
 
-        <vue-markdown :source='bodyLocal'></vue-markdown>
+        <vue-markdown :source="bodyLocal" />
       </div>
     </article>
   </div>
 </template>
 
 <script>
-  import VueMarkdown from 'vue-markdown'
-  import RegisterStoreModule from '../store/mixins/registerStoreModule'
-  import Articles from '../store/modules/article'
+  import VueMarkdown from "vue-markdown-render";
+  import RegisterStoreModule from '../store/mixins/registerStoreModule.js'
+  import Articles from '../store/modules/article.js'
 
   export default {
     props: {
@@ -38,7 +38,7 @@
 
     data () {
       return {
-        idLocal: this.id,
+        idLocal: parseInt(this.id),
         slugLocal: this.slug,
         titleLocal: this.title,
         bodyLocal: this.body,
@@ -51,13 +51,16 @@
 
     created () {
       this.registerStoreModule('articles', Articles)
-    },
-
-    mounted () {
       if (typeof this.title === "undefined") {
         this.$store.dispatch('fetchArticle', { slug: this.slug }).then(this.updateLocalData)
       }
     },
+
+    // onMount() {
+    //   if (typeof this.title === "undefined") {
+    //     this.$store.dispatch('fetchArticle', { slug: this.slug }).then(this.updateLocalData)
+    //   }
+    // },
 
     methods: {
 

@@ -1,6 +1,6 @@
-import VueRouter from 'vue-router'
-import Article from './components/Article';
-import ArticleListing from './components/ArticleListing';
+import { createWebHistory, createRouter } from "vue-router";
+import Article from './components/Article.vue';
+import ArticleListing from './components/ArticleListing.vue';
 
 const routes = [
   {
@@ -16,8 +16,8 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
+const router = createRouter({
+  history: createWebHistory(),
   routes,
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
