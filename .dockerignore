@@ -8,6 +8,7 @@
 
 # Ignore all default key files.
 /config/master.key
+/config/local_env.yml
 /config/credentials/*.key
 
 # Ignore all environment files.
@@ -19,11 +20,13 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/yarn-error.log
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
-!/tmp/pids/
 !/tmp/pids/.keep
+/tmp/cache/*
+!/tmp/cache/.keep
 
 # Ignore storage (uploaded files in development and any SQLite databases).
 /storage/*
