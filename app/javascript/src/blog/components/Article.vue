@@ -7,15 +7,18 @@
     </section>
 
     <article class="article-container">
-      <header class="text-header">
+      <div v-if="loading">
+        Loading...
+      </div>
+      <header v-if="!loading" class="text-header">
         <h2 class="title">{{ titleLocal }}</h2>
       </header>
-      <div class="container">
+      <div v-if="!loading" class="container">
         <div v-if="banner_urlLocal" class="header-image">
           <img :src="banner_urlLocal" :alt="imageAlt()"/>
         </div>
 
-        <vue-markdown :source="bodyLocal" />
+        <vue-markdown v-if="bodyLocal" :source="bodyLocal" />
       </div>
     </article>
   </div>
@@ -38,12 +41,13 @@
 
     data () {
       return {
+        banner_urlLocal: this.banner_url,
+        bodyLocal: this.body,
+        created_atLocal: this.created_at,
         idLocal: parseInt(this.id),
+        loading: true,
         slugLocal: this.slug,
         titleLocal: this.title,
-        bodyLocal: this.body,
-        banner_urlLocal: this.banner_url,
-        created_atLocal: this.created_at,
       }
     },
 
@@ -51,16 +55,15 @@
 
     created () {
       this.registerStoreModule('articles', Articles)
+    },
+
+    mounted() {
+      this.loading = true
       if (typeof this.title === "undefined") {
         this.$store.dispatch('fetchArticle', { slug: this.slug }).then(this.updateLocalData)
       }
+      this.loading = false
     },
-
-    // onMount() {
-    //   if (typeof this.title === "undefined") {
-    //     this.$store.dispatch('fetchArticle', { slug: this.slug }).then(this.updateLocalData)
-    //   }
-    // },
 
     methods: {
 
