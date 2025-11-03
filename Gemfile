@@ -1,19 +1,14 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '3.1.6'
+ruby '3.4.2'
 
 gem 'rails', '~> 6.1'
 gem 'redis', '~> 5.0'
 
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 5.2.1'
-
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development do
+  gem 'graphiql-rails'
   gem 'listen', '~> 3.3.0'
   gem 'spring'
 end
@@ -25,13 +20,17 @@ gem 'haml', '~> 5.2.2'
 gem 'jquery-rails', '~> 4.6.0'
 gem 'rails-i18n', '~> 6.0'
 gem 'redcarpet', '~> 3.5.1'
-gem 'vite_rails', '~> 3.0.19'
 gem 'sprockets', '< 4'
+gem 'turbolinks', '~> 5.2.1'
+gem 'uglifier', '>= 1.3.0'
+gem 'vite_rails', '~> 3.0.19'
 
 
 # BE Gems
 gem "aws-sdk-s3", require: false
+gem 'drb', '~> 2.2.3'
 gem 'colored2', '~> 3.1.2'
+gem 'graphql', '~> 2.5.14'
 gem 'image_processing', '~> 1.12'
 gem 'pg', '~> 1.5', '>= 1.5.4'
 gem 'pry-rails', '~> 0.3.6'
