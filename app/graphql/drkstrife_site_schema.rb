@@ -6,6 +6,12 @@ class DrkstrifeSiteSchema < GraphQL::Schema
 
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
+  use GraphQL::Schema::Visibility,
+    profiles: {
+      public_api: { admin: false, beta: false, public: true },
+      beta_api: { admin: false, beta: true, public: true },
+      admin_api: { admin: true, beta: true, public: true },
+    }
 
   # GraphQL-Ruby calls this when something goes wrong while running a query:
   def self.type_error(err, context)

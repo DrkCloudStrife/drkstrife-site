@@ -8,7 +8,7 @@ gem 'redis', '~> 5.0'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development do
-  gem 'graphiql-rails'
+  gem 'graphiql-rails', '~> 1.10.5'
   gem 'listen', '~> 3.3.0'
   gem 'spring'
 end

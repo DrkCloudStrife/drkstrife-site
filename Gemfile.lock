@@ -286,7 +286,7 @@ DEPENDENCIES
   dartsass-rails (~> 0.5.0)
   dockerfile-rails (>= 1.2)
   drb (~> 2.2.3)
-  graphiql-rails
+  graphiql-rails (~> 1.10.5)
   graphql (~> 2.5.14)
   haml (~> 5.2.2)
   image_processing (~> 1.12)
