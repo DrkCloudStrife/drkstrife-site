@@ -31,7 +31,7 @@
 
   export default {
     props: {
-      id: Number,
+      id: [Number, String],
       slug: String,
       title: String,
       body: String,
