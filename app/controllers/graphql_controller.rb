@@ -11,6 +11,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
+      is_admin: authenticated?,
       visibility_profile: authenticated? ? :admin_api : :public_api
     }
     result = DrkstrifeSiteSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
