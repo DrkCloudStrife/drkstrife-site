@@ -1,1 +1,1 @@
-import Blog from '../src/blog/main.js'
+import Blog from '@/blog/main.js'

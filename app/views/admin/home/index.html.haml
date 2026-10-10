@@ -1,2 +1,5 @@
 .container.admin-home-container
-  #article-list
+  #admin-dashboard
+
+- content_for :page_close do
+  = vite_javascript_tag('admin', 'data-turbolinks-track': 'reload')

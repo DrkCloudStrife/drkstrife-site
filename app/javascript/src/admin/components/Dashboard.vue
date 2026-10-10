@@ -1,11 +1,11 @@
 <template>
-  <div id="home-blog">
-    <router-view />
+  <div>
+    <section>TODO</section>
   </div>
 </template>
 
 <script>
-  export default { }
+export default {}
 </script>
 
 <style scoped>

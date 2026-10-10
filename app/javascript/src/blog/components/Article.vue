@@ -26,8 +26,8 @@
 
 <script>
   import VueMarkdown from "vue-markdown-render";
-  import RegisterStoreModule from '../store/mixins/registerStoreModule.js'
-  import Articles from '../store/modules/article.js'
+  import RegisterStoreModule from '@storeMixins/registerStoreModule.js'
+  import Articles from '@storeModules/article.js'
 
   export default {
     props: {
